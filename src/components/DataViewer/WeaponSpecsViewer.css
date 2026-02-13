@@ -1,0 +1,33 @@
+.weapon-specs-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.weapon-specs-viewer-section h2 {
+  margin-top: 0;
+}
+
+.weapon-specs-viewer-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.weapon-specs-viewer-table th,
+.weapon-specs-viewer-table td {
+  border: 1px solid #444;
+  padding: 1px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.weapon-specs-viewer-table th:first-child,
+.weapon-specs-viewer-table td:first-child {
+  width: 120px;
+}
+
+.weapon-specs-viewer-table th {
+  background-color: var(--accent-color);
+  font-weight: bold;
+}

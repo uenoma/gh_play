@@ -1,0 +1,31 @@
+.spec-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.spec-viewer-section h2 {
+  margin-top: 0;
+}
+
+.spec-viewer-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.spec-viewer-table th,
+.spec-viewer-table td {
+  border: 1px solid #444;
+  padding: 1px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.spec-table td:nth-child(odd) {
+  width: 100px;
+}
+
+.spec-table td:nth-child(even) {
+  width: 20px;
+}

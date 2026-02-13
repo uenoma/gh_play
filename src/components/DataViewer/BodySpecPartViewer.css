@@ -1,0 +1,62 @@
+.body-spec-part {
+  margin-right: 5px;
+}
+
+.body-spec-part-table {
+  border-collapse: collapse;
+  table-layout: auto;
+  width: auto;
+}
+
+.body-spec-part-table th,
+.body-spec-part-table td {
+  border: 1px solid #444;
+  padding: 1px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+.body-spec-part-table th {
+  padding: 2px 2px 2px 2px;
+  width: 40px;
+  height: 20px;
+}
+
+
+.body-spec-part-table th {
+  background-color: var(--accent-color);
+  font-weight: bold;
+  font-size: 8px;
+  white-space: normal;
+}
+
+.body-spec-part-table th:first-child {
+  font-size: 10px;
+}
+
+.body-spec-part-table td:first-child {
+  font-weight: bold;
+}
+
+.back-row {
+  /* 必要に応じてスタイル */
+}
+
+.dcp-circle {
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin: 0px auto 0px auto;
+  color: black;
+  font-size: 8px;
+  text-align: center;
+  line-height: 10px;
+}
+
+.armor-row {
+  border-top: 2px double #444;
+}

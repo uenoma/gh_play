@@ -1,0 +1,57 @@
+.body-specs-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.body-specs-viewer-section h2 {
+  margin-top: 0;
+}
+
+.body-specs-viewer-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.body-specs-viewer-table th,
+.body-specs-viewer-table td {
+  border: 1px solid #444;
+  padding: 6px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.body-specs-viewer-table th {
+  background-color: var(--accent-color);
+  font-weight: bold;
+  font-size: 8px;
+  white-space: normal;
+}
+
+.body-specs-viewer-table th:first-child {
+  font-size: 10px;
+}
+
+.body-specs-viewer-table td:first-child {
+  font-weight: bold;
+}
+
+.viewer-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+}
+
+.body-specs-part {
+  margin-right: 20px;
+}
+
+.body-specs-part:last-child {
+  margin-right: 0;
+}
+
+.back-row {
+  border-bottom: 3px double #444;
+}

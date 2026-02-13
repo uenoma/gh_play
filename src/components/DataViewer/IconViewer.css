@@ -1,0 +1,15 @@
+.icon-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.icon-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.icon-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: gray;
+}

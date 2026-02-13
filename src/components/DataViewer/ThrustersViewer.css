@@ -1,0 +1,32 @@
+.thrusters-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.thrusters-viewer-section h2 {
+  margin-top: 0;
+}
+
+.thrusters-viewer-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.thrusters-viewer-table th,
+.thrusters-viewer-table td {
+  border: 1px solid #444;
+  padding: 1px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.thrusters-viewer-table th {
+  background-color: var(--accent-color);
+  font-weight: bold;
+}
+
+.viewer-thrusters-table td:first-child {
+  width: 100px;
+}

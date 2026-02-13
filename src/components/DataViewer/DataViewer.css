@@ -1,0 +1,91 @@
+.data-viewer {
+  padding: 10px 10px 10px 10px;
+  color: black;
+  background-color: var(--viewer-bg);
+  width: 1400px;
+  margin: 0px auto 1px auto;
+}
+
+.viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.viewer-section h2 {
+  margin-top: 0;
+}
+
+.viewer-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.viewer-table th,
+.viewer-table td {
+  border: 1px solid #444;
+  padding: 6px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.viewer-table thead th {
+  background-color: var(--accent-color);
+  font-weight: bold;
+}
+
+.viewer-table tbody th {
+  font-weight: bold;
+  text-align: left;
+}
+
+.viewer-table tbody {
+  color: black;
+  background-color: var(--viewer-bg);
+}
+
+.dcp-circle {
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin: 0px auto 0px auto;
+  color: black;
+  font-size: 8px;
+  text-align: center;
+  line-height: 10px;
+}
+
+.viewer-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+}
+
+.viewer-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.viewer-spacer10 {
+  width: 10px;
+}
+.viewer-spacer50 {
+  width: 50px;
+}
+.viewer-spacer100 {
+  width: 100px;
+}
+
+.avoidance-defence-column {
+  width: 300px;
+}
+
+.grapple-thrusters-row .viewer-section {
+  min-width: 250px;
+}

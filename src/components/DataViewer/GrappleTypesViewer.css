@@ -1,0 +1,39 @@
+.grapple-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.grapple-viewer-section h2 {
+  margin-top: 0;
+}
+
+.grapple-viewer-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 100%;
+}
+
+.grapple-viewer-table th,
+.grapple-viewer-table td {
+  border: 1px solid #444;
+  padding: 1px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.grapple-viewer-table th {
+  background-color: var(--accent-color);
+  font-weight: bold;
+}
+
+.viewer-grapple-types-table td:first-child {
+  width: 100px;
+}
+
+.viewer-grapple-types-table td:nth-child(2),
+.viewer-grapple-types-table td:nth-child(3),
+.viewer-grapple-types-table td:nth-child(4) {
+  width: 35px;
+}

@@ -1,0 +1,34 @@
+.basic-info-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.basic-info-viewer-section h2 {
+  margin-top: 0;
+}
+
+.viewer-basic-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.viewer-basic-info-table td {
+  font-weight: bold;
+}
+
+.data-id-cell {
+  text-align: right;
+  font-size: 20px;
+}
+
+.ms-name-cell {
+  text-align: left;
+  font-size: 20px;
+}
+
+.ms-name-optional-cell {
+  text-align: left;
+  font-size: 16px;
+  font-weight: normal;
+}
+

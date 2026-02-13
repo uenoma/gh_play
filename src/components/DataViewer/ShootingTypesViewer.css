@@ -1,0 +1,32 @@
+.shooting-types-table {
+  width: 900px;
+}
+
+.shooting-types-table th:not(.shooting-name-column):not(.shooting-direction-column) {
+  width: 30px;
+}
+
+.shooting-name-column {
+  width: 130px;
+}
+
+.shooting-direction-column {
+  width: 60px;
+}
+
+.hit-last-row {
+  border-bottom: 3px double #444;
+}
+
+.times-circle {
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin: 0px auto 0px auto;
+  color: black;
+  font-size: 8px;
+  text-align: center;
+  line-height: 10px;
+}

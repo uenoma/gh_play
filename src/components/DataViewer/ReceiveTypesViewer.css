@@ -1,0 +1,33 @@
+.receive-types-viewer-section {
+  background-color: var(--viewer-bg);
+}
+
+.receive-types-viewer-section h2 {
+  margin-top: 0;
+}
+
+.receive-types-viewer-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.receive-types-viewer-table th,
+.receive-types-viewer-table td {
+  border: 1px solid #444;
+  padding: 1px;
+  text-align: center;
+  color: black;
+  background-color: var(--viewer-bg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.receive-types-viewer-table th:first-child,
+.receive-types-viewer-table td:first-child {
+  width: 120px;
+}
+
+.receive-types-viewer-table th {
+  background-color: var(--accent-color);
+  font-weight: bold;
+}
