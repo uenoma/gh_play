@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import DataViewer from "../DataViewer/DataViewer";
 import "./MSDeck.css";
+import "../Common.css";
 
 function MSDeck() {
   const [mobileSuits, setMobileSuits] = useState([]);
@@ -95,8 +96,8 @@ function MSDeck() {
   return (
     <div>
       <div className="msdeck-table-container">
-        <table className="msdeck-table">
-        <thead className="msdeck-thead-sticky">
+        <table className="common-table">
+        <thead className="common-thead-sticky">
           <tr>
             <th onClick={() => handleSort('ms_number')} style={{ cursor: 'pointer' }}>型式番号 {sortKey === 'ms_number' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
             <th onClick={() => handleSort('ms_name')} style={{ cursor: 'pointer' }}>名称 {sortKey === 'ms_name' && (sortOrder === 'asc' ? '↑' : '↓')}</th>

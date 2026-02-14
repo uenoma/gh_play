@@ -117,7 +117,6 @@
 .tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
   width: 100%;
   background: var(--panel-bg);
   backdrop-filter: blur(10px);
@@ -151,11 +150,10 @@
 }
 
 .tab-content {
-  margin-top: 20px;
   width: 100%;
+  height: calc(100vh - 150px);
   display: flex;
   justify-content: center;
-  padding: 20px;
 }
 
 @keyframes App-logo-spin {

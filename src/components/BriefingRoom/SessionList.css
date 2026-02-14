@@ -1,0 +1,113 @@
+.session-list {
+  width: 100%;
+  height: 95%;
+}
+
+.session-list h3 {
+  margin-bottom: 10px;
+}
+
+.session-create-btn {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 1px solid #00ffff;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.session-table-container {
+  height: 90%;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  overscroll-behavior: contain;
+  overflow: auto;
+}
+
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.session-table th,
+.session-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.session-table th {
+  text-align: left;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+}
+
+.session-table th:first-child {
+  text-align: center;
+}
+
+.session-table tr {
+  cursor: pointer;
+}
+
+.session-table tr.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.session-join-btn {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 1px solid #00ffff;
+  color: white;
+  padding: 2px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;  white-space: nowrap;}
+
+.session-delete-btn {
+  background: linear-gradient(145deg, #8b0000, #b22222);
+  border: 1px solid #ff0000;
+  color: white;
+  padding: 2px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.action-cell {
+  text-align: left;
+}
+
+.session-name {
+  text-align: left !important;
+}
+
+.session-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.session-refresh-btn {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 1px solid #00ffff;
+  color: white;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+}
+
+.session-refresh-btn img {
+  width: 20px;
+  height: 20px;
+}

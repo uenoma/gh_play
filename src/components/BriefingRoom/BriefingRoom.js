@@ -1,10 +1,17 @@
 import React from 'react';
+import SessionList from './SessionList';
+import Chat from './Chat';
+import './BriefingRoom.css';
 
 function BriefingRoom() {
   return (
-    <div>
-      <h2>ブリーフィング</h2>
-      <p>ここはブリーフィングルームのコンテンツです。</p>
+    <div className="briefing-room">
+      <div className="briefing-left">
+        <SessionList />
+      </div>
+      <div className="briefing-right">
+        <Chat />
+      </div>
     </div>
   );
 }

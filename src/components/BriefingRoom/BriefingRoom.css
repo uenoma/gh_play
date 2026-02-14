@@ -1,0 +1,22 @@
+.briefing-room {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.briefing-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.briefing-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+}
