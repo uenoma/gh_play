@@ -6,6 +6,7 @@ import BattleMap from './components/BattleMap/BattleMap';
 
 function App() {
   const [activeTab, setActiveTab] = useState('briefing');
+  const [selectedSession, setSelectedSession] = useState(null);
 
   const tabs = [
     { id: 'briefing', label: 'ブリーフィング' },
@@ -16,13 +17,13 @@ function App() {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'briefing':
-        return <BriefingRoom />;
+        return <BriefingRoom onSelectSession={setSelectedSession} />;
       case 'msdeck':
         return <MSDeck />;
       case 'combatmap':
         return <BattleMap />;
       default:
-        return <BriefingRoom />;
+        return <BriefingRoom onSelectSession={setSelectedSession} />;
     }
   };
 
@@ -31,6 +32,9 @@ function App() {
       <header className="App-header">
         <div className="header-bar">
           <div className="logo">GH Play</div>
+          <div className="session-info">
+            {selectedSession ? `${selectedSession.name}` : 'セッションを選択してください'}
+          </div>
           <div className="auth-buttons">
             <button className="auth-btn">ログイン</button>
             <button className="auth-btn">サインイン</button>

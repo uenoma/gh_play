@@ -49,6 +49,11 @@
   text-align: center;
 }
 
+.session-table tr.selected {
+  background-color: #007bff;
+  color: white;
+}
+
 .session-table tr {
   cursor: pointer;
 }

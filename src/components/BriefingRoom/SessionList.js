@@ -4,10 +4,11 @@ import iconReload from "../../assets/images/icon_reload.png";
 import "./SessionList.css";
 import "../Common.css";
 
-function SessionList() {
+function SessionList({ onSelectSession }) {
   const [sessionList, setSessionList] = useState(sessions);
   const [sortKey, setSortKey] = useState("id");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [selectedSession, setSelectedSession] = useState(null);
 
   const handleRefresh = () => {
     // ダミーの更新処理（実際にはAPIから再取得）
@@ -65,7 +66,14 @@ function SessionList() {
           </thead>
           <tbody>
             {sessionList.map((session) => (
-              <tr key={session.id}>
+              <tr
+                key={session.id}
+                className={selectedSession === session.id ? 'selected' : ''}
+                onClick={() => {
+                  setSelectedSession(session.id);
+                  if (onSelectSession) onSelectSession(session);
+                }}
+              >
                 <td>{session.id}</td>
                 <td className="session-name">{session.name}</td>
                 <td>{session.creator}</td>
@@ -73,17 +81,19 @@ function SessionList() {
                 <td className="action-cell">
                   <button
                     className="session-delete-btn"
-                    onClick={() =>
-                      alert(`セッション "${session.name}" を削除しました！`)
-                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert(`セッション "${session.name}" を削除しました！`);
+                    }}
                   >
                     削除
                   </button>
                   <button
                     className="session-join-btn"
-                    onClick={() =>
-                      alert(`セッション "${session.name}" に参加しました！`)
-                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert(`セッション "${session.name}" に参加しました！`);
+                    }}
                   >
                     参加
                   </button>

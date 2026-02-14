@@ -3,7 +3,7 @@ const sessions = [
   { id: 2, name: '迫撃！トリプル・ドム', creator: 'uenoma', participants: 5 },
   { id: 3, name: '女スパイ潜入！', creator: 'uenoma', participants: 2 },
   { id: 4, name: 'コンスコン強襲！', creator: 'uenoma', participants: 4 },
-  { id: 5, name: 'ソロモンの攻略戦', creator: 'uenoma', participants: 3 },
+  { id: 5, name: 'ソロモン攻略戦', creator: 'uenoma', participants: 3 },
   { id: 6, name: '宇宙要塞ア・バオア・クー', creator: 'uenoma', participants: 5 },
   { id: 7, name: 'ジャブローの風', creator: 'uenoma', participants: 2 },
   { id: 8, name: '白い闇を抜けて', creator: 'uenoma', participants: 4 },

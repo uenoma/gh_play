@@ -87,6 +87,13 @@
   font-family: 'Courier New', monospace;
 }
 
+.session-info {
+  text-align: center;
+  flex: 1;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
 .auth-buttons {
   display: flex;
   gap: 10px;
