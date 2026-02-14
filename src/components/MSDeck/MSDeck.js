@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import DataViewer from "../DataViewer/DataViewer";
+import MSList from "./MSList";
 import "./MSDeck.css";
 import "../Common.css";
 
@@ -10,7 +11,7 @@ function MSDeck() {
   const [selectedMS, setSelectedMS] = useState(null);
   const [sortKey, setSortKey] = useState("id");
   const [sortOrder, setSortOrder] = useState("asc");
-  const rowRefs = useRef([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchMobileSuits = async () => {
@@ -35,15 +36,6 @@ function MSDeck() {
 
     fetchMobileSuits();
   }, []);
-
-  useEffect(() => {
-    if (selectedMS && rowRefs.current[selectedMS.id]) {
-      rowRefs.current[selectedMS.id].scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, [selectedMS]);
 
   const prevMS = () => {
     const index = mobileSuits.findIndex((ms) => ms.id === selectedMS.id);
@@ -81,7 +73,7 @@ function MSDeck() {
   };
 
   if (loading) {
-    return <div>読み込み中...</div>;
+    return <div className="loading-spinner"></div>;
   }
 
   if (error) {
@@ -96,56 +88,34 @@ function MSDeck() {
     return 0;
   });
 
+  const filteredMobileSuits = sortedMobileSuits.filter((ms) =>
+    ms.ms_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    ms.ms_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (ms.ms_name_optional && ms.ms_name_optional.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   return (
     <div className="msdeck-container">
       <div className="edit-container">
+        <input
+          type="text"
+          placeholder="検索..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
         <button className="edit-button" onClick={() => window.open('https://dndhideout.com/gh/data_builder/', '_blank')}>データ編集</button>
       </div>
       <div className="msdeck-table-container">
-        <table className="common-table">
-          <thead className="common-thead-sticky">
-            <tr>
-              <th
-                onClick={() => handleSort("ms_number")}
-                style={{ cursor: "pointer" }}
-              >
-                型式番号{" "}
-                {sortKey === "ms_number" && (sortOrder === "asc" ? "↑" : "↓")}
-              </th>
-              <th
-                onClick={() => handleSort("ms_name")}
-                style={{ cursor: "pointer" }}
-              >
-                名称{" "}
-                {sortKey === "ms_name" && (sortOrder === "asc" ? "↑" : "↓")}
-              </th>
-              <th
-                onClick={() => handleSort("ms_name_optional")}
-                style={{ cursor: "pointer" }}
-              >
-                オプション{" "}
-                {sortKey === "ms_name_optional" &&
-                  (sortOrder === "asc" ? "↑" : "↓")}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedMobileSuits.map((ms) => (
-              <tr
-                key={ms.id}
-                ref={(el) => (rowRefs.current[ms.id] = el)}
-                onClick={() => setSelectedMS(ms)}
-                className={
-                  selectedMS && ms.id === selectedMS.id ? "selected" : ""
-                }
-              >
-                <td>{ms.ms_number}</td>
-                <td>{ms.ms_name}</td>
-                <td>{ms.ms_name_optional || "-"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <MSList
+          mobileSuits={mobileSuits}
+          selectedMS={selectedMS}
+          onSelectMS={setSelectedMS}
+          searchTerm={searchTerm}
+          sortKey={sortKey}
+          sortOrder={sortOrder}
+          handleSort={handleSort}
+        />
       </div>
       <div className="msdeck-navigation">
         <button

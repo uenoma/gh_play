@@ -7,6 +7,38 @@
   margin-bottom: 10px;
 }
 
+.session-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.session-search-input {
+  flex: 1;
+  max-width: 200px;
+  padding: 5px 10px;
+  border: 1px solid #00ffff;
+  background: #2a2a4e;
+  color: white;
+  border-radius: 5px;
+  margin: 0 10px;
+}
+
+.session-search-input::placeholder {
+  color: #ccc;
+}
+
+.session-refresh-btn {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 1px solid #00ffff;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
 .session-create-btn {
   background: linear-gradient(145deg, #1a1a2e, #16213e);
   border: 1px solid #00ffff;
@@ -97,7 +129,7 @@
   justify-content: space-between;
   align-items: flex-end;
   margin-top: 10px;
-  margin-bottom: 2px;
+  margin-bottom: 10px;
 }
 
 .session-refresh-btn {

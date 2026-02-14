@@ -9,6 +9,7 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
   const [sortKey, setSortKey] = useState("id");
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedSession, setSelectedSession] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     setSelectedSession(appSelectedSession);
@@ -32,12 +33,24 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
     setSessionList(sorted);
   };
 
+  const filteredSessionList = sessionList.filter((session) =>
+    session.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    session.creator.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="session-list">
       <div className="session-buttons">
         <button className="session-refresh-btn" onClick={handleRefresh}>
           <img src={iconReload} alt="更新" />
         </button>
+        <input
+          type="text"
+          placeholder="検索..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="session-search-input"
+        />
         <button
           className="session-create-btn"
           onClick={() => alert("セッション作成機能は未実装です")}
@@ -69,7 +82,7 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
             </tr>
           </thead>
           <tbody>
-            {sessionList.map((session) => (
+            {filteredSessionList.map((session) => (
               <tr
                 key={session.id}
                 className={selectedSession?.id === session.id ? 'selected' : ''}
