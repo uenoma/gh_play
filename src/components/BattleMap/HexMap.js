@@ -83,7 +83,7 @@ function HexMap(props) {
         canvasContext.lineTo(xPos + lineLength, yPos + hexHeight);
 
         // 中心点
-        canvasContext.roundRect(xPos + lineLength / 2, yPos + hexHeight / 2, 1, 1);
+        canvasContext.fillRect(xPos + lineLength / 2, yPos + hexHeight / 2, 1, 1);
 
       }
     }
