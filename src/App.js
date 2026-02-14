@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import BriefingRoom from './components/BriefingRoom/BriefingRoom';
 import MSDeck from './components/MSDeck/MSDeck';
-import BattleMap from './components/BattleMap/BattleMap';
+import MapContainer from './components/BattleMap/MapContainer';
 
 function App() {
   const [activeTab, setActiveTab] = useState('briefing');
@@ -21,7 +21,7 @@ function App() {
       case 'msdeck':
         return <MSDeck />;
       case 'combatmap':
-        return <BattleMap />;
+        return <MapContainer />;
       default:
         return <BriefingRoom onSelectSession={setSelectedSession} />;
     }
