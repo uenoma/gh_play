@@ -1,9 +1,11 @@
 import React from 'react';
 import './Chat.css';
 
-function Chat() {
+function ChatMessages({ isChannelOpen, isParticipantOpen }) {
+  const className = `chat-main ${isChannelOpen ? 'channel-open' : 'channel-closed'} ${isParticipantOpen ? 'participant-open' : 'participant-closed'}`;
+
   return (
-    <div className="chat">
+    <div className={className}>
       <div className="chat-messages">
         <p>チャットメッセージがここに表示されます...</p>
         <p>ユーザー1: こんにちは！</p>
@@ -17,4 +19,4 @@ function Chat() {
   );
 }
 
-export default Chat;
+export default ChatMessages;
