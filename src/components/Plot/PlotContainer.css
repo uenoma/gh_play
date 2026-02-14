@@ -3,4 +3,5 @@
   background-color: #2a2a4e;
   color: #fff;
   width: 100%;
+  overflow: auto;
 }

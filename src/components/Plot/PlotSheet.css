@@ -11,6 +11,7 @@
 .plot-PlotSheet table td {
   padding: 2px 5px;
   border: solid 1px black;
+  width: 100px;
 }
 
 .plot-tables-container {
@@ -24,6 +25,10 @@
   overflow-x: auto;
 }
 
+.plot-pilot-table-container td {
+  text-align: left;
+}
+
 .plot-pilot-table,
 .plot-weapon-table {
   width: 100%;
@@ -31,7 +36,7 @@
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .plot-pilot-table th,
@@ -39,10 +44,14 @@
   text-align: left;
   font-weight: bold;
   border-bottom: 1px solid #ddd;
-  font-size: 12px;
+  font-size: 10px;
   background-color: #f0f0f0;
   color: black;
   white-space: nowrap;
+}
+
+.plot-weapon-table th {
+  text-align: center;
 }
 
 .plot-pilot-table th {

@@ -3,18 +3,18 @@ import './PlotSheet.css';
 
 function PlotSheet({ pilotData }) {
   const weapons = [
-    { name: 'ビームライフル', damage: 6, ammo: 8 },
-    { name: 'ビームサーベル', damage: 8, ammo: '-' },
-    { name: 'シールド', damage: '-', ammo: '-' }
+    { name: 'ビームライフル', damage: '-', ammo: 3 },
+    { name: 'ビームサーベル', damage: '-', ammo: '-' },
+    { name: 'シールド', damage: '2', ammo: '-' }
   ];
 
   // 列幅の定義
   const columnWidths = {
     inning: '15px',        // イニング
-    movePlan: '100px',      // 移動計画
+    movePlan: '90px',     // 移動計画
     evasion: '15px',       // 回避運動
     rmCm: '15px',          // RM・CM
-    hex: '40px',           // ヘックス
+    hex: '50px',           // ヘックス
     direction: '15px',     // 方向
     altitude: '15px',      // 高度
     inertiaSpeed: '30px',  // 慣性・速度 (各列)
@@ -25,6 +25,15 @@ function PlotSheet({ pilotData }) {
   };
 
   const actions = [
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
+    { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
     { inning: 1, movePlan: '1-3,r,2-5,T', evasion: '12', rmCm: '', hex: '2030', direction: '6', altitude: '', inertiaSpeed: ['1-2', '3-5', 'U-2'], propellant: [80, 75, 70, 65, 60, 55, 50, 45, 40], pilotPoints: [2, 10, 8], movement: 'CE2 S3 F1', attackMemo: 'BS上段斬る' },
   ];
 
@@ -45,6 +54,10 @@ function PlotSheet({ pilotData }) {
               <tr>
                 <th>パイロットポイント</th>
                 <td>{pilotData.points}</td>
+              </tr>
+              <tr>
+                <th>ロストパイロットポイント</th>
+                <td>{pilotData.lostPoints}</td>
               </tr>
             </tbody>
           </table>
@@ -74,18 +87,32 @@ function PlotSheet({ pilotData }) {
         <table className="plot-action-table">
           <thead>
             <tr>
-              <th style={{ width: columnWidths.inning }}>イニング</th>
-              <th style={{ width: columnWidths.movePlan }}>移動計画</th>
-              <th style={{ width: columnWidths.evasion }}>回避運動</th>
-              <th style={{ width: columnWidths.rmCm }}>R M ・ C M</th>
-              <th style={{ width: columnWidths.hex }}>ヘックス</th>
-              <th style={{ width: columnWidths.direction }}>方向</th>
-              <th style={{ width: columnWidths.altitude }}>高度</th>
-              <th colSpan="3" style={{ width: `calc(${columnWidths.inertiaSpeed} * 3)` }}>慣性・速度</th>
-              <th colSpan="9" style={{ width: `calc(${columnWidths.propellant} * 9)` }}>推進剤残量</th>
-              <th colSpan="3" style={{ width: `calc(${columnWidths.pilotPoints} * 3)` }}>パイロット ポイント</th>
-              <th style={{ width: columnWidths.movement }}>運動</th>
-              <th style={{ width: columnWidths.attackMemo }}>攻撃計画メモ</th>
+              <th rowSpan="2" style={{ width: columnWidths.inning }}>イニング</th>
+              <th rowSpan="2" style={{ width: columnWidths.movePlan }}>移動計画</th>
+              <th rowSpan="2" style={{ width: columnWidths.evasion }}>回避運動</th>
+              <th rowSpan="2" style={{ width: columnWidths.rmCm }}>R M ・ C M</th>
+              <th rowSpan="2" style={{ width: columnWidths.hex }}>ヘックス</th>
+              <th rowSpan="2" style={{ width: columnWidths.direction }}>方向</th>
+              <th rowSpan="2" style={{ width: columnWidths.altitude }}>高度</th>
+              <th rowSpan="2" colSpan="3" style={{ width: `calc(${columnWidths.inertiaSpeed} * 3)` }}>慣性・速度</th>
+              <th rowSpan="1" colSpan="9" style={{ width: `calc(${columnWidths.propellant} * 9)` }}>推進剤残量</th>
+              <th rowSpan="1" colSpan="3" style={{ width: `calc(${columnWidths.pilotPoints} * 3)` }}>パイロットポイント</th>
+              <th rowSpan="2" style={{ width: columnWidths.movement }}>運動</th>
+              <th rowSpan="2" style={{ width: columnWidths.attackMemo }}>攻撃計画メモ</th>
+            </tr>
+            <tr>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.propellant }}></th>
+              <th style={{ width: columnWidths.pilotPoints }}>確認</th>
+              <th style={{ width: columnWidths.pilotPoints }}>命中</th>
+              <th style={{ width: columnWidths.pilotPoints }}>回避</th>
             </tr>
           </thead>
           <tbody>
