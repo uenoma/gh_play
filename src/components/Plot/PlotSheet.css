@@ -7,6 +7,12 @@
   padding: 5mm;
 }
 
+.plot-PlotSheet table input {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 .plot-PlotSheet table th,
 .plot-PlotSheet table td {
   padding: 2px 5px;
