@@ -3,9 +3,12 @@
 }
 
 :root {
+  /* この色定義は変更禁止 */
   --viewer-bg: #b6ccb7;
   --accent-color: #2d9fa3;
   --form-accent-color: #564f99;
+
+
   --spaceship-bg: linear-gradient(180deg, #000000 0%, #000022 50%, #000000 100%);
   --panel-bg: rgba(0, 10, 20, 0.9);
   --glow-color: #00ffff;
