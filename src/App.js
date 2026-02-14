@@ -29,6 +29,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <div className="header-bar">
+          <div className="logo">GH Play</div>
+          <div className="auth-buttons">
+            <button className="auth-btn">ログイン</button>
+            <button className="auth-btn">サインイン</button>
+          </div>
+        </div>
         <div className="tabs">
           {tabs.map(tab => (
             <button

@@ -6,6 +6,9 @@
   --viewer-bg: #b6ccb7;
   --accent-color: #2d9fa3;
   --form-accent-color: #564f99;
+  --spaceship-bg: linear-gradient(180deg, #000000 0%, #000022 50%, #000000 100%);
+  --panel-bg: rgba(0, 10, 20, 0.9);
+  --glow-color: #00ffff;
 }
 
 .App-logo {
@@ -20,7 +23,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: #000000;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,46 +31,131 @@
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
-  padding-top: 20px;
+  padding-top: 10px;
+  position: relative;
+}
+
+.App-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #aaa, transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(200,200,200,0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, #ccc, transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(200,200,200,0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, #bbb, transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  z-index: 11;
+  position: relative;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--glow-color);
+  font-family: 'Courier New', monospace;
+  margin-left: 20px;
+}
+
+.header-title {
+  text-align: center;
+  flex: 1;
+}
+
+.header-title h1 {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+  margin: 0;
+  font-family: 'Courier New', monospace;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.auth-btn {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 1px solid var(--glow-color);
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.auth-btn:hover {
+  box-shadow: 0 0 10px var(--glow-color);
+  transform: translateY(-1px);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--accent-color);
 }
 
 .tabs {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  background-color: #282c34;
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glow-color);
   padding: 10px 0;
-  z-index: 10;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
 }
 
 .tab {
-  background-color: #444;
-  border: none;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 1px solid var(--glow-color);
   color: white;
   padding: 10px 20px;
   margin: 0 5px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tab:hover {
+  box-shadow: 0 0 15px var(--glow-color);
+  transform: translateY(-2px);
 }
 
 .tab.active {
-  background-color: #61dafb;
+  background: linear-gradient(145deg, #00ffff, #0080ff);
+  color: #000;
+  box-shadow: 0 0 20px var(--glow-color);
 }
 
 .tab-content {
-  margin-top: 80px; /* タブの高さを考慮して調整 */
+  margin-top: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 @keyframes App-logo-spin {
