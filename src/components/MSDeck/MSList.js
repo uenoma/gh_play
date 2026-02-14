@@ -67,7 +67,7 @@ function MSList({ mobileSuits, selectedMS, onSelectMS, searchTerm, sortKey, sort
           >
             <td>{ms.ms_number}</td>
             <td className="left-align">{ms.ms_name}</td>
-            <td>{ms.ms_name_optional || "-"}</td>
+            <td className="left-align">{ms.ms_name_optional || "-"}</td>
           </tr>
         ))}
       </tbody>

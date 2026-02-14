@@ -5,6 +5,8 @@
   flex-direction: row;
   height: 100%;
   font-size: 1rem;
+  background-color: black;
+  color: white;
 }
 
 .chat-sidebar.open {
@@ -71,6 +73,8 @@
   flex-direction: column;
   font-size: 1rem;
   margin: 0 5px;
+  background-color: black;
+  color: white;
 }
 
 .chat-messages {
@@ -80,6 +84,8 @@
   overflow-y: auto;
   min-height: 0;
   font-size: 1rem;
+  background-color: black;
+  color: white;
 }
 
 .chat-input-area {
@@ -88,6 +94,8 @@
   align-items: center;
   flex-shrink: 0;
   font-size: 1rem;
+  background-color: black;
+  color: white;
 }
 
 .chat-input {
@@ -96,6 +104,8 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  background-color: black;
+  color: white;
 }
 
 .chat-send-btn {
@@ -121,6 +131,8 @@
   padding: 10px;
   font-size: 1rem;
   text-align: left;
+  background-color: black;
+  color: white;
 }
 
 .chat-participants.open,
@@ -130,6 +142,8 @@
   padding: 10px;
   font-size: 1rem;
   text-align: left;
+  background-color: black;
+  color: white;
 }
 
 .chat-participants h4 {

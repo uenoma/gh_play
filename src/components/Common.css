@@ -12,6 +12,11 @@
   text-align: center;
 }
 
+.common-table td {
+  background-color: black;
+  color: white;
+}
+
 .common-table th {
   text-align: center;
   background-color: #333333;
@@ -30,6 +35,10 @@
 .common-table tr.selected {
   background-color: #007bff;
   color: white;
+}
+
+.common-table tr.selected td {
+  background-color: #007bff;
 }
 
 /* スティッキーヘッダー用 */
