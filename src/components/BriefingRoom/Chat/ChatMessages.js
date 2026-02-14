@@ -8,8 +8,6 @@ function ChatMessages({ isChannelOpen, isParticipantOpen }) {
     <div className={className}>
       <div className="chat-messages">
         <p>チャットメッセージがここに表示されます...</p>
-        <p>ユーザー1: こんにちは！</p>
-        <p>ユーザー2: セッションに参加しましょう。</p>
       </div>
       <div className="chat-input-area">
         <input type="text" className="chat-input" placeholder="メッセージを入力..." />

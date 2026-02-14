@@ -14,7 +14,7 @@
 
 .common-table th {
   text-align: center;
-  background-color: #444;
+  background-color: #333333;
   color: white;
   white-space: nowrap;
 }
@@ -36,7 +36,7 @@
 .common-thead-sticky {
   position: sticky;
   top: 0;
-  background-color: #444;
+  background-color: #333333;
   color: white;
   z-index: 1;
 }

@@ -99,7 +99,7 @@ function MSDeck() {
   return (
     <div className="msdeck-container">
       <div className="edit-container">
-        <button className="edit-button">データ編集</button>
+        <button className="edit-button" onClick={() => window.open('https://dndhideout.com/gh/data_builder/', '_blank')}>データ編集</button>
       </div>
       <div className="msdeck-table-container">
         <table className="common-table">

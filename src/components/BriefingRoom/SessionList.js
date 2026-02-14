@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import sessions from "./sessionData";
 import iconReload from "../../assets/images/icon_reload.png";
 import "./SessionList.css";
 import "../Common.css";
 
-function SessionList({ onSelectSession }) {
+function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
   const [sessionList, setSessionList] = useState(sessions);
   const [sortKey, setSortKey] = useState("id");
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedSession, setSelectedSession] = useState(null);
+
+  useEffect(() => {
+    setSelectedSession(appSelectedSession);
+  }, [appSelectedSession]);
 
   const handleRefresh = () => {
     // ダミーの更新処理（実際にはAPIから再取得）
@@ -68,9 +72,9 @@ function SessionList({ onSelectSession }) {
             {sessionList.map((session) => (
               <tr
                 key={session.id}
-                className={selectedSession === session.id ? 'selected' : ''}
+                className={selectedSession?.id === session.id ? 'selected' : ''}
                 onClick={() => {
-                  setSelectedSession(session.id);
+                  setSelectedSession(session);
                   if (onSelectSession) onSelectSession(session);
                 }}
               >

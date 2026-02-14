@@ -9,8 +9,8 @@
   --form-accent-color: #564f99;
 
 
-  --spaceship-bg: linear-gradient(180deg, #000000 0%, #000022 50%, #000000 100%);
-  --panel-bg: rgba(0, 10, 20, 0.9);
+  --spaceship-bg: linear-gradient(180deg, #1a1a2e 0%, #2a2a4e 50%, #1a1a2e 100%);
+  --panel-bg: #141E28CC;
   --glow-color: #00ffff;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .App-header {
-  background: #000000;
+  background: var(--spaceship-bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -45,14 +45,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(2px 2px at 20px 30px, #aaa, transparent),
-    radial-gradient(2px 2px at 40px 70px, rgba(200,200,200,0.3), transparent),
-    radial-gradient(1px 1px at 90px 40px, #ccc, transparent),
-    radial-gradient(1px 1px at 130px 80px, rgba(200,200,200,0.3), transparent),
-    radial-gradient(2px 2px at 160px 30px, #bbb, transparent);
-  background-repeat: repeat;
-  background-size: 200px 100px;
+  background-image: none;
+  background-size: none;
   opacity: 0;
   pointer-events: none;
 }
@@ -104,7 +98,7 @@
 }
 
 .auth-btn {
-  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  background: linear-gradient(145deg, #2a2a4e, #1a1a3e);
   border: 1px solid var(--glow-color);
   color: white;
   padding: 8px 16px;
@@ -112,7 +106,7 @@
   border-radius: 5px;
   font-size: 14px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px #0000004D;
 }
 
 .auth-btn:hover {
@@ -132,11 +126,11 @@
   backdrop-filter: blur(10px);
   border: 1px solid var(--glow-color);
   padding: 10px 0;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px #00FFFF33;
 }
 
 .tab {
-  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  background: linear-gradient(145deg, #2a2a4e, #1a1a3e);
   border: 1px solid var(--glow-color);
   color: white;
   padding: 10px 20px;
@@ -145,7 +139,7 @@
   border-radius: 5px;
   font-size: 16px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px #0000004D;
 }
 
 .tab:hover {

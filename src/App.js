@@ -19,7 +19,7 @@ function App() {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'briefing':
-        return <BriefingRoom onSelectSession={setSelectedSession} />;
+        return <BriefingRoom onSelectSession={setSelectedSession} selectedSession={selectedSession} />;
       case 'msdeck':
         return <MSDeck />;
       case 'combatmap':
@@ -27,7 +27,7 @@ function App() {
       case 'plot':
         return <PlotContainer />;
       default:
-        return <BriefingRoom onSelectSession={setSelectedSession} />;
+        return <BriefingRoom onSelectSession={setSelectedSession} selectedSession={selectedSession} />;
     }
   };
 
