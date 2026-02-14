@@ -8,8 +8,8 @@ function MSDeck() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedMS, setSelectedMS] = useState(null);
-  const [sortKey, setSortKey] = useState('id');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortKey, setSortKey] = useState("id");
+  const [sortOrder, setSortOrder] = useState("asc");
   const rowRefs = useRef([]);
 
   useEffect(() => {
@@ -38,19 +38,22 @@ function MSDeck() {
 
   useEffect(() => {
     if (selectedMS && rowRefs.current[selectedMS.id]) {
-      rowRefs.current[selectedMS.id].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      rowRefs.current[selectedMS.id].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   }, [selectedMS]);
 
   const prevMS = () => {
-    const index = mobileSuits.findIndex(ms => ms.id === selectedMS.id);
+    const index = mobileSuits.findIndex((ms) => ms.id === selectedMS.id);
     if (index > 0) {
       setSelectedMS(mobileSuits[index - 1]);
     }
   };
 
   const nextMS = () => {
-    const index = mobileSuits.findIndex(ms => ms.id === selectedMS.id);
+    const index = mobileSuits.findIndex((ms) => ms.id === selectedMS.id);
     if (index < mobileSuits.length - 1) {
       setSelectedMS(mobileSuits[index + 1]);
     }
@@ -70,10 +73,10 @@ function MSDeck() {
 
   const handleSort = (key) => {
     if (sortKey === key) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortKey(key);
-      setSortOrder('asc');
+      setSortOrder("asc");
     }
   };
 
@@ -86,47 +89,103 @@ function MSDeck() {
   }
 
   const sortedMobileSuits = [...mobileSuits].sort((a, b) => {
-    const aValue = a[sortKey] || '';
-    const bValue = b[sortKey] || '';
-    if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1;
-    if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1;
+    const aValue = a[sortKey] || "";
+    const bValue = b[sortKey] || "";
+    if (aValue < bValue) return sortOrder === "asc" ? -1 : 1;
+    if (aValue > bValue) return sortOrder === "asc" ? 1 : -1;
     return 0;
   });
 
   return (
-    <div>
+    <div className="msdeck-container">
+      <div className="edit-container">
+        <button className="edit-button">データ編集</button>
+      </div>
       <div className="msdeck-table-container">
         <table className="common-table">
-        <thead className="common-thead-sticky">
-          <tr>
-            <th onClick={() => handleSort('ms_number')} style={{ cursor: 'pointer' }}>型式番号 {sortKey === 'ms_number' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-            <th onClick={() => handleSort('ms_name')} style={{ cursor: 'pointer' }}>名称 {sortKey === 'ms_name' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-            <th onClick={() => handleSort('ms_name_optional')} style={{ cursor: 'pointer' }}>オプション {sortKey === 'ms_name_optional' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedMobileSuits.map((ms) => (
-            <tr
-              key={ms.id}
-              ref={(el) => (rowRefs.current[ms.id] = el)}
-              onClick={() => setSelectedMS(ms)}
-              className={selectedMS && ms.id === selectedMS.id ? "selected" : ""}
-            >
-              <td>{ms.ms_number}</td>
-              <td>{ms.ms_name}</td>
-              <td>{ms.ms_name_optional || "-"}</td>
+          <thead className="common-thead-sticky">
+            <tr>
+              <th
+                onClick={() => handleSort("ms_number")}
+                style={{ cursor: "pointer" }}
+              >
+                型式番号{" "}
+                {sortKey === "ms_number" && (sortOrder === "asc" ? "↑" : "↓")}
+              </th>
+              <th
+                onClick={() => handleSort("ms_name")}
+                style={{ cursor: "pointer" }}
+              >
+                名称{" "}
+                {sortKey === "ms_name" && (sortOrder === "asc" ? "↑" : "↓")}
+              </th>
+              <th
+                onClick={() => handleSort("ms_name_optional")}
+                style={{ cursor: "pointer" }}
+              >
+                オプション{" "}
+                {sortKey === "ms_name_optional" &&
+                  (sortOrder === "asc" ? "↑" : "↓")}
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedMobileSuits.map((ms) => (
+              <tr
+                key={ms.id}
+                ref={(el) => (rowRefs.current[ms.id] = el)}
+                onClick={() => setSelectedMS(ms)}
+                className={
+                  selectedMS && ms.id === selectedMS.id ? "selected" : ""
+                }
+              >
+                <td>{ms.ms_number}</td>
+                <td>{ms.ms_name}</td>
+                <td>{ms.ms_name_optional || "-"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       <div className="msdeck-navigation">
-        <button onClick={firstMS} disabled={!selectedMS || selectedMS.id === mobileSuits[0]?.id}>|←</button>
-        <button onClick={prevMS} disabled={!selectedMS || mobileSuits.findIndex(ms => ms.id === selectedMS.id) === 0}>←</button>
-        <button onClick={nextMS} disabled={!selectedMS || mobileSuits.findIndex(ms => ms.id === selectedMS.id) === mobileSuits.length - 1}>→</button>
-        <button onClick={lastMS} disabled={!selectedMS || selectedMS.id === mobileSuits[mobileSuits.length - 1]?.id}>→|</button>
+        <button
+          onClick={firstMS}
+          disabled={!selectedMS || selectedMS.id === mobileSuits[0]?.id}
+        >
+          |←
+        </button>
+        <button
+          onClick={prevMS}
+          disabled={
+            !selectedMS ||
+            mobileSuits.findIndex((ms) => ms.id === selectedMS.id) === 0
+          }
+        >
+          ←
+        </button>
+        <button
+          onClick={nextMS}
+          disabled={
+            !selectedMS ||
+            mobileSuits.findIndex((ms) => ms.id === selectedMS.id) ===
+              mobileSuits.length - 1
+          }
+        >
+          →
+        </button>
+        <button
+          onClick={lastMS}
+          disabled={
+            !selectedMS ||
+            selectedMS.id === mobileSuits[mobileSuits.length - 1]?.id
+          }
+        >
+          →|
+        </button>
       </div>
-      <DataViewer data={selectedMS} />
+      <div className="msdeck-data-viewer">
+        <DataViewer data={selectedMS} />
+      </div>
     </div>
   );
 }

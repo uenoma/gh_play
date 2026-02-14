@@ -3,6 +3,7 @@ import './App.css';
 import BriefingRoom from './components/BriefingRoom/BriefingRoom';
 import MSDeck from './components/MSDeck/MSDeck';
 import MapContainer from './components/BattleMap/MapContainer';
+import PlotContainer from './components/Plot/PlotContainer';
 
 function App() {
   const [activeTab, setActiveTab] = useState('briefing');
@@ -11,7 +12,8 @@ function App() {
   const tabs = [
     { id: 'briefing', label: 'ブリーフィング' },
     { id: 'msdeck', label: 'MSデッキ' },
-    { id: 'combatmap', label: '戦闘マップ' }
+    { id: 'combatmap', label: '戦闘マップ' },
+    { id: 'plot', label: '行動計画' }
   ];
 
   const renderTabContent = () => {
@@ -22,6 +24,8 @@ function App() {
         return <MSDeck />;
       case 'combatmap':
         return <MapContainer />;
+      case 'plot':
+        return <PlotContainer />;
       default:
         return <BriefingRoom onSelectSession={setSelectedSession} />;
     }
