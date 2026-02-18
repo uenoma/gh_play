@@ -1,5 +1,6 @@
 .msdeck-container {
   width: 100%;
+  overflow: auto;
 }
 
 .edit-container {
