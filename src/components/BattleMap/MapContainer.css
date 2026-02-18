@@ -1,6 +1,8 @@
 .MapContainer {
-  height: 100%;
-  overflow: auto;
+  height: calc(100% + 20px);
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .MapContainerSettings {

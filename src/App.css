@@ -1,5 +1,7 @@
 .App {
+  max-height: 100vh;
   text-align: center;
+  overflow: hidden;
 }
 
 :root {
