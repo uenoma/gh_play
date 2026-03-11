@@ -3,6 +3,7 @@ import DataViewer from "../DataViewer/DataViewer";
 import MSList from "./MSList";
 import "./MSDeck.css";
 import "../Common.css";
+import { getMobileSuits } from "../../common/ApiWrapper";
 
 function MSDeck() {
   const [mobileSuits, setMobileSuits] = useState([]);
@@ -16,13 +17,7 @@ function MSDeck() {
   useEffect(() => {
     const fetchMobileSuits = async () => {
       try {
-        const response = await fetch(
-          "https://dndhideout.com/gh/gh_backend/public/api/mobile-suits",
-        );
-        if (!response.ok) {
-          throw new Error("データの取得に失敗しました");
-        }
-        const data = await response.json();
+        const data = await getMobileSuits();
         setMobileSuits(data);
         if (data.length > 0) {
           setSelectedMS(data[0]);
