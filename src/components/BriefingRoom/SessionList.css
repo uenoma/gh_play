@@ -58,6 +58,17 @@
   overflow: auto;
 }
 
+.session-status-msg {
+  text-align: center;
+  padding: 24px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.session-error-msg {
+  color: #ff6b6b;
+}
+
 .session-table {
   width: 100%;
   border-collapse: collapse;
@@ -107,6 +118,30 @@
 .session-delete-btn {
   background: linear-gradient(145deg, #8b0000, #b22222);
   border: 1px solid #ff0000;
+  color: white;
+  padding: 2px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.session-edit-btn {
+  background: linear-gradient(145deg, #1a3a1a, #2a5a2a);
+  border: 1px solid #00cc66;
+  color: white;
+  padding: 2px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.session-detail-btn {
+  background: linear-gradient(145deg, #1a2a3a, #2a3a5a);
+  border: 1px solid #5599ff;
   color: white;
   padding: 2px 20px;
   cursor: pointer;

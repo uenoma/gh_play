@@ -1,24 +1,53 @@
-import React, { useState, useEffect } from "react";
-import sessions from "./sessionData";
+import React, { useState, useEffect, useCallback } from "react";
+import { getGameSessions } from "../../common/ApiWrapper";
 import iconReload from "../../assets/images/icon_reload.png";
+import SessionCreateModal from "./SessionCreateModal";
+import SessionDetailModal from "./SessionDetailModal";
 import "./SessionList.css";
 import "../Common.css";
 
-function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
-  const [sessionList, setSessionList] = useState(sessions);
+function SessionList({ onSelectSession, selectedSession: appSelectedSession, authUser }) {
+  const [sessionList, setSessionList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [sortKey, setSortKey] = useState("id");
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedSession, setSelectedSession] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [createModal, setCreateModal] = useState(false);
+  const [detailSessionId, setDetailSessionId] = useState(null);
+
+  const fetchSessions = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getGameSessions();
+      setSessionList(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchSessions();
+  }, [fetchSessions]);
 
   useEffect(() => {
     setSelectedSession(appSelectedSession);
   }, [appSelectedSession]);
 
   const handleRefresh = () => {
-    // ダミーの更新処理（実際にはAPIから再取得）
-    setSessionList([...sessions]);
-    alert("セッション一覧を更新しました");
+    fetchSessions();
+  };
+
+  const openCreateModal = () => {
+    if (!authUser) {
+      setError("セッションを作成するにはログインしてください。");
+      return;
+    }
+    setCreateModal(true);
   };
 
   const handleSort = (key) => {
@@ -26,8 +55,10 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
     setSortKey(key);
     setSortOrder(order);
     const sorted = [...sessionList].sort((a, b) => {
-      if (a[key] < b[key]) return order === "asc" ? -1 : 1;
-      if (a[key] > b[key]) return order === "asc" ? 1 : -1;
+      const aVal = key === "creator" ? a.user?.name : a[key];
+      const bVal = key === "creator" ? b.user?.name : b[key];
+      if (aVal < bVal) return order === "asc" ? -1 : 1;
+      if (aVal > bVal) return order === "asc" ? 1 : -1;
       return 0;
     });
     setSessionList(sorted);
@@ -35,7 +66,7 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
 
   const filteredSessionList = sessionList.filter((session) =>
     session.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    session.creator.toLowerCase().includes(searchTerm.toLowerCase())
+    (session.user?.name ?? "").toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -53,12 +84,17 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
         />
         <button
           className="session-create-btn"
-          onClick={() => alert("セッション作成機能は未実装です")}
+          onClick={openCreateModal}
         >
           セッション作成
         </button>
       </div>
       <div className="session-table-container">
+        {loading ? (
+          <p className="session-status-msg">読み込み中...</p>
+        ) : error ? (
+          <p className="session-status-msg session-error-msg">{error}</p>
+        ) : (
         <table className="common-table">
           <thead className="common-thead-sticky">
             <tr>
@@ -73,9 +109,9 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
                 作成者{" "}
                 {sortKey === "creator" && (sortOrder === "asc" ? "↑" : "↓")}
               </th>
-              <th onClick={() => handleSort("participants")}>
-                参加人数{" "}
-                {sortKey === "participants" &&
+              <th onClick={() => handleSort("capacity")}>
+                定員{" "}
+                {sortKey === "capacity" &&
                   (sortOrder === "asc" ? "↑" : "↓")}
               </th>
               <th>操作</th>
@@ -93,9 +129,18 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
               >
                 <td>{session.id}</td>
                 <td className="session-name">{session.name}</td>
-                <td>{session.creator}</td>
-                <td>{session.participants}</td>
+                <td>{session.user?.name}</td>
+                <td>{session.capacity}</td>
                 <td className="action-cell">
+                  <button
+                    className="session-detail-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDetailSessionId(session.id);
+                    }}
+                  >
+                    詳細
+                  </button>
                   <button
                     className="session-delete-btn"
                     onClick={(e) => {
@@ -119,7 +164,22 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession }) {
             ))}
           </tbody>
         </table>
+        )}
       </div>
+
+      {detailSessionId && (
+        <SessionDetailModal
+          sessionId={detailSessionId}
+          authUser={authUser}
+          onClose={() => setDetailSessionId(null)}
+        />
+      )}
+      {createModal && (
+        <SessionCreateModal
+          onSuccess={() => { setCreateModal(false); fetchSessions(); }}
+          onClose={() => setCreateModal(false)}
+        />
+      )}
     </div>
   );
 }

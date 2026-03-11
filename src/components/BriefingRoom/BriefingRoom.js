@@ -3,11 +3,11 @@ import SessionList from './SessionList';
 import Chat from './Chat/Chat';
 import './BriefingRoom.css';
 
-function BriefingRoom({ onSelectSession, selectedSession }) {
+function BriefingRoom({ onSelectSession, selectedSession, authUser }) {
   return (
     <div className="briefing-room">
       <div className="briefing-left">
-        <SessionList onSelectSession={onSelectSession} selectedSession={selectedSession} />
+        <SessionList onSelectSession={onSelectSession} selectedSession={selectedSession} authUser={authUser} />
       </div>
       <div className="briefing-right">
         <Chat />

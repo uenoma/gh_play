@@ -103,3 +103,22 @@
 .auth-btn-cancel:hover {
   box-shadow: 0 0 10px #888;
 }
+
+.create-session-textarea {
+  background: #0d1117;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.create-session-textarea:focus {
+  border-color: var(--glow-color);
+  box-shadow: 0 0 6px #00ffff44;
+}

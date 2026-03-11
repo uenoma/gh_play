@@ -128,3 +128,42 @@ export const updateMobileSuit = (id, params) => request('PUT', `/mobile-suits/${
  */
 export const deleteMobileSuit = (id, { creator_name, edit_password }) =>
   request('DELETE', `/mobile-suits/${id}`, { creator_name, edit_password });
+
+// ============================================================
+// ゲームセッション
+// ============================================================
+
+/**
+ * ゲームセッション一覧取得
+ * @returns {object[]}
+ */
+export const getGameSessions = () => request('GET', '/game-sessions');
+
+/**
+ * ゲームセッション詳細取得
+ * @param {number} id
+ * @returns {object}
+ */
+export const getGameSession = (id) => request('GET', `/game-sessions/${id}`);
+
+/**
+ * ゲームセッション作成（認証必須）
+ * @param {{ name: string, description?: string, capacity: number }} params
+ * @returns {object}
+ */
+export const createGameSession = (params) => request('POST', '/game-sessions', params, true);
+
+/**
+ * ゲームセッション削除（認証必須）
+ * @param {number} id
+ * @returns {{ message: string }}
+ */
+export const deleteGameSession = (id) => request('DELETE', `/game-sessions/${id}`, null, true);
+
+/**
+ * ゲームセッション編集（認証必須）
+ * @param {number} id
+ * @param {{ name?: string, description?: string, capacity?: number }} params
+ * @returns {object}
+ */
+export const updateGameSession = (id, params) => request('PATCH', `/game-sessions/${id}`, params, true);
