@@ -14,6 +14,7 @@ function AuthModal({ mode, onSuccess, onClose }) {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const mouseDownOnOverlay = useRef(false);
 
   const handleChange = (e) => {
@@ -51,49 +52,65 @@ function AuthModal({ mode, onSuccess, onClose }) {
           {mode === 'register' && (
             <div className="auth-form-group">
               <label>アカウント名</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="英数字・_-.のみ"
-                required
-              />
+              <div className="auth-input-wrap">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="英数字・_-.のみ"
+                  required
+                />
+              </div>
             </div>
           )}
           <div className="auth-form-group">
             <label>メールアドレス</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="example@mail.com"
-              required
-            />
+            <div className="auth-input-wrap">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="example@mail.com"
+                required
+              />
+            </div>
           </div>
           <div className="auth-form-group">
             <label>パスワード</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="8文字以上"
-              required
-            />
+            <div className="auth-input-wrap">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="8文字以上"
+                required
+              />
+              <button
+                type="button"
+                className="auth-pw-toggle"
+                onClick={() => setShowPassword((v) => !v)}
+                tabIndex={-1}
+              >
+                {showPassword ? '🙈' : '👁️'}
+              </button>
+            </div>
           </div>
           {mode === 'register' && (
             <div className="auth-form-group">
               <label>パスワード（確認）</label>
-              <input
-                type="password"
-                name="password_confirmation"
-                value={formData.password_confirmation}
-                onChange={handleChange}
-                placeholder="パスワードを再入力"
-                required
-              />
+              <div className="auth-input-wrap">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password_confirmation"
+                  value={formData.password_confirmation}
+                  onChange={handleChange}
+                  placeholder="パスワードを再入力"
+                  required
+                />
+              </div>
             </div>
           )}
           {error && <p className="auth-error">{error}</p>}

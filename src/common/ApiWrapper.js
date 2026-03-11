@@ -10,7 +10,7 @@ export const removeToken = () => localStorage.removeItem(TOKEN_KEY);
 
 // 共通フェッチヘルパー
 const request = async (method, path, body = null, requireAuth = false) => {
-  const headers = { 'Content-Type': 'application/json' };
+  const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
 
   if (requireAuth) {
     const token = getToken();
