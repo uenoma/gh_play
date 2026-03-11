@@ -167,3 +167,17 @@ export const deleteGameSession = (id) => request('DELETE', `/game-sessions/${id}
  * @returns {object}
  */
 export const updateGameSession = (id, params) => request('PATCH', `/game-sessions/${id}`, params, true);
+
+/**
+ * ゲームセッションに参加（認証必須）
+ * @param {number} id
+ * @returns {object}
+ */
+export const joinGameSession = (id) => request('POST', `/game-sessions/${id}/join`, null, true);
+
+/**
+ * ゲームセッションから離脱（認証必須）
+ * @param {number} id
+ * @returns {{ message: string }}
+ */
+export const leaveGameSession = (id) => request('DELETE', `/game-sessions/${id}/leave`, null, true);

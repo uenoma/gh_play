@@ -116,15 +116,19 @@
   font-size: 14px;  white-space: nowrap;}
 
 .session-delete-btn {
-  background: linear-gradient(145deg, #8b0000, #b22222);
-  border: 1px solid #ff0000;
-  color: white;
-  padding: 2px 20px;
+  background: transparent;
+  border: none;
+  padding: 2px;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 14px;
-  white-space: nowrap;
-  margin-right: 5px;
+  border-radius: 4px;
+  line-height: 0;
+  margin-right: 4px;
+  opacity: 0.8;
+}
+
+.session-delete-btn:hover {
+  opacity: 1;
+  background: #ff000022;
 }
 
 .session-edit-btn {
@@ -140,15 +144,26 @@
 }
 
 .session-detail-btn {
-  background: linear-gradient(145deg, #1a2a3a, #2a3a5a);
-  border: 1px solid #5599ff;
-  color: white;
-  padding: 2px 20px;
+  background: transparent;
+  border: none;
+  padding: 2px;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 14px;
-  white-space: nowrap;
-  margin-right: 5px;
+  border-radius: 4px;
+  line-height: 0;
+  margin-right: 4px;
+  opacity: 0.8;
+}
+
+.session-detail-btn:hover {
+  opacity: 1;
+  background: #5599ff22;
+}
+
+.session-detail-btn img,
+.session-delete-btn img {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .action-cell {

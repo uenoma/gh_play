@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { createGameSession } from "../../common/ApiWrapper";
 import "../Auth/AuthModal.css";
+import "./SessionCreateModal.css";
 
 /**
  * @param {{ onSuccess: () => void, onClose: () => void }} props

@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getGameSession, updateGameSession } from "../../common/ApiWrapper";
+import { getGameSession, updateGameSession, joinGameSession, leaveGameSession } from "../../common/ApiWrapper";
 import "../Auth/AuthModal.css";
+import "./SessionCreateModal.css";
 import "./SessionDetailModal.css";
+import iconMinus from "../../assets/images/icon_minus.png";
 
 /**
  * @param {{ sessionId: number, authUser: object|null, onClose: () => void }} props
  */
-function SessionDetailModal({ sessionId, authUser, onClose }) {
+function SessionDetailModal({ sessionId, authUser, onClose, onUpdate }) {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -14,6 +16,8 @@ function SessionDetailModal({ sessionId, authUser, onClose }) {
   const [editForm, setEditForm] = useState({ name: "", description: "", capacity: 1 });
   const [editError, setEditError] = useState("");
   const [editLoading, setEditLoading] = useState(false);
+  const [leaveLoading, setLeaveLoading] = useState(false);
+  const [joinLoading, setJoinLoading] = useState(false);
   const mouseDownOnOverlay = useRef(false);
 
   const loadSession = async () => {
@@ -56,6 +60,37 @@ function SessionDetailModal({ sessionId, authUser, onClose }) {
   };
 
   const isOwner = authUser && session && authUser.id === session.user?.id;
+  const isMember = authUser && session && session.members?.some((m) => m.id === authUser.id);
+
+  const handleJoin = async () => {
+    if (!authUser) return;
+    setJoinLoading(true);
+    setError("");
+    try {
+      await joinGameSession(sessionId);
+      onUpdate?.();
+      await loadSession();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setJoinLoading(false);
+    }
+  };
+
+  const handleLeave = async () => {
+    if (!window.confirm("このセッションから離脱しますか？")) return;
+    setLeaveLoading(true);
+    setError("");
+    try {
+      await leaveGameSession(sessionId);
+      onUpdate?.();
+      onClose();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLeaveLoading(false);
+    }
+  };
 
   const formatDate = (iso) =>
     iso ? new Date(iso).toLocaleString("ja-JP", { dateStyle: "short", timeStyle: "short" }) : "-";
@@ -101,6 +136,35 @@ function SessionDetailModal({ sessionId, authUser, onClose }) {
             <div className="session-detail-row">
               <dt>更新日時</dt>
               <dd>{formatDate(session.updated_at)}</dd>
+            </div>
+            <div className="session-detail-row session-detail-members-row">
+              <dt>参加者</dt>
+              <dd>
+                {session.members && session.members.length > 0 ? (
+                  <ul className="session-members-list">
+                    {session.members.map((member) => (
+                      <li key={member.id} className="session-member-item">
+                        <span className="session-member-name">{member.name}</span>
+                        <span className="session-member-date">
+                          {formatDate(member.pivot?.joined_at)}
+                        </span>
+                        {authUser && authUser.id === member.id && (
+                          <button
+                            className="session-member-leave-btn"
+                            title="離脱"
+                            onClick={handleLeave}
+                            disabled={leaveLoading}
+                          >
+                            <img src={iconMinus} alt="離脱" />
+                          </button>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span className="session-no-members">参加者なし</span>
+                )}
+              </dd>
             </div>
           </dl>
         )}
@@ -156,6 +220,11 @@ function SessionDetailModal({ sessionId, authUser, onClose }) {
         <div className="auth-modal-actions">
           {isOwner && (
             <button className="auth-btn session-edit-action-btn" onClick={openEdit}>編集</button>
+          )}
+          {authUser && !isMember && (
+            <button className="auth-btn session-join-action-btn" onClick={handleJoin} disabled={joinLoading}>
+              {joinLoading ? "処理中..." : "参加"}
+            </button>
           )}
           <button className="auth-btn auth-btn-cancel" onClick={onClose}>閉じる</button>
         </div>

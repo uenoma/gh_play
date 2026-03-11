@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { getGameSessions } from "../../common/ApiWrapper";
+import { getGameSessions, deleteGameSession } from "../../common/ApiWrapper";
 import iconReload from "../../assets/images/icon_reload.png";
+import iconDelete from "../../assets/images/icon_delete.png";
+import iconDetail from "../../assets/images/icon_detail.png";
 import SessionCreateModal from "./SessionCreateModal";
 import SessionDetailModal from "./SessionDetailModal";
 import "./SessionList.css";
@@ -65,6 +67,17 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
     setCreateModal(true);
   };
 
+  const handleDelete = async (e, session) => {
+    e.stopPropagation();
+    if (!window.confirm(`セッション "${session.name}" を削除しますか？`)) return;
+    try {
+      await deleteGameSession(session.id);
+      fetchSessions();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const handleSort = (key) => {
     const order = sortKey === key && sortOrder === "asc" ? "desc" : "asc";
     setSortKey(key);
@@ -122,6 +135,7 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
                 {sortKey === "capacity" &&
                   (sortOrder === "asc" ? "↑" : "↓")}
               </th>
+              <th>参加人数</th>
               <th>操作</th>
             </tr>
           </thead>
@@ -139,33 +153,26 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
                 <td className="session-name">{session.name}</td>
                 <td>{session.user?.name}</td>
                 <td>{session.capacity}</td>
+                <td className="session-member-count">
+                  {session.members_count ?? session.members?.length ?? "-"}
+                </td>
                 <td className="action-cell">
                   <button
                     className="session-detail-btn"
+                    title="詳細"
                     onClick={(e) => {
                       e.stopPropagation();
                       setDetailSessionId(session.id);
                     }}
                   >
-                    詳細
+                    <img src={iconDetail} alt="詳細" />
                   </button>
                   <button
                     className="session-delete-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      alert(`セッション "${session.name}" を削除しました！`);
-                    }}
+                    title="削除"
+                    onClick={(e) => handleDelete(e, session)}
                   >
-                    削除
-                  </button>
-                  <button
-                    className="session-join-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      alert(`セッション "${session.name}" に参加しました！`);
-                    }}
-                  >
-                    参加
+                    <img src={iconDelete} alt="削除" />
                   </button>
                 </td>
               </tr>
@@ -180,6 +187,7 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
           sessionId={detailSessionId}
           authUser={authUser}
           onClose={() => setDetailSessionId(null)}
+          onUpdate={fetchSessions}
         />
       )}
       {createModal && (
