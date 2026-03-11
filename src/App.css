@@ -120,6 +120,45 @@
   color: var(--accent-color);
 }
 
+.user-menu-wrap {
+  position: relative;
+}
+
+.auth-username-btn {
+  color: var(--glow-color);
+  border-color: var(--glow-color);
+}
+
+.user-submenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: linear-gradient(180deg, #1a1a2e 0%, #2a2a4e 100%);
+  border: 1px solid var(--glow-color);
+  box-shadow: 0 0 16px #00ffff44;
+  border-radius: 5px;
+  min-width: 120px;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.user-submenu-item {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.user-submenu-item:hover {
+  background: #ffffff18;
+}
+
 .tabs {
   display: flex;
   justify-content: center;

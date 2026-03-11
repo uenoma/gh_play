@@ -4,10 +4,29 @@ import BriefingRoom from './components/BriefingRoom/BriefingRoom';
 import MSDeck from './components/MSDeck/MSDeck';
 import MapContainer from './components/BattleMap/MapContainer';
 import PlotContainer from './components/Plot/PlotContainer';
+import { logout } from './common/ApiWrapper';
+import AuthModal from './components/Auth/AuthModal';
 
 function App() {
   const [activeTab, setActiveTab] = useState('briefing');
   const [selectedSession, setSelectedSession] = useState(null);
+
+  const [authModal, setAuthModal] = useState(null); // null | 'login' | 'register'
+  const [authUser, setAuthUser] = useState(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const openModal = (type) => setAuthModal(type);
+  const closeModal = () => setAuthModal(null);
+
+  const handleLogout = async () => {
+    setUserMenuOpen(false);
+    try {
+      await logout();
+    } catch (_) {
+      // トークンが無効でもローカルの状態はクリアする
+    }
+    setAuthUser(null);
+  };
 
   const tabs = [
     { id: 'briefing', label: 'ブリーフィング' },
@@ -40,8 +59,26 @@ function App() {
             {selectedSession ? `${selectedSession.name}` : 'セッションを選択してください'}
           </div>
           <div className="auth-buttons">
-            <button className="auth-btn">ログイン</button>
-            <button className="auth-btn">サインイン</button>
+            {authUser ? (
+              <div className="user-menu-wrap">
+                <button
+                  className="auth-btn auth-username-btn"
+                  onClick={() => setUserMenuOpen((prev) => !prev)}
+                >
+                  {authUser.name} ▾
+                </button>
+                {userMenuOpen && (
+                  <div className="user-submenu">
+                    <button className="user-submenu-item" onClick={handleLogout}>ログアウト</button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <button className="auth-btn" onClick={() => openModal('login')}>ログイン</button>
+                <button className="auth-btn" onClick={() => openModal('register')}>サインイン</button>
+              </>
+            )}
           </div>
         </div>
         <div className="tabs">
@@ -58,6 +95,13 @@ function App() {
         <div className="tab-content">
           {renderTabContent()}
         </div>
+      {authModal && (
+        <AuthModal
+          mode={authModal}
+          onSuccess={(user) => { setAuthUser(user); closeModal(); }}
+          onClose={closeModal}
+        />
+      )}
       </header>
     </div>
   );
