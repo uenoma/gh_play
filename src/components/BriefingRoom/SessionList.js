@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { getGameSessions } from "../../common/ApiWrapper";
 import iconReload from "../../assets/images/icon_reload.png";
 import SessionCreateModal from "./SessionCreateModal";
@@ -17,18 +17,33 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
   const [createModal, setCreateModal] = useState(false);
   const [detailSessionId, setDetailSessionId] = useState(null);
 
+  const sortKeyRef = useRef(sortKey);
+  const sortOrderRef = useRef(sortOrder);
+  useEffect(() => { sortKeyRef.current = sortKey; }, [sortKey]);
+  useEffect(() => { sortOrderRef.current = sortOrder; }, [sortOrder]);
+
+  const applySort = useCallback((list, key, order) => {
+    return [...list].sort((a, b) => {
+      const aVal = key === "creator" ? a.user?.name : a[key];
+      const bVal = key === "creator" ? b.user?.name : b[key];
+      if (aVal < bVal) return order === "asc" ? -1 : 1;
+      if (aVal > bVal) return order === "asc" ? 1 : -1;
+      return 0;
+    });
+  }, []);
+
   const fetchSessions = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const data = await getGameSessions();
-      setSessionList(data);
+      setSessionList(applySort(data, sortKeyRef.current, sortOrderRef.current));
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [applySort]);
 
   useEffect(() => {
     fetchSessions();
@@ -54,14 +69,7 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
     const order = sortKey === key && sortOrder === "asc" ? "desc" : "asc";
     setSortKey(key);
     setSortOrder(order);
-    const sorted = [...sessionList].sort((a, b) => {
-      const aVal = key === "creator" ? a.user?.name : a[key];
-      const bVal = key === "creator" ? b.user?.name : b[key];
-      if (aVal < bVal) return order === "asc" ? -1 : 1;
-      if (aVal > bVal) return order === "asc" ? 1 : -1;
-      return 0;
-    });
-    setSessionList(sorted);
+    setSessionList((prev) => applySort(prev, key, order));
   };
 
   const filteredSessionList = sessionList.filter((session) =>
