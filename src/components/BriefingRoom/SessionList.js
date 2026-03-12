@@ -167,13 +167,15 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
                   >
                     <img src={iconDetail} alt="詳細" />
                   </button>
-                  <button
-                    className="session-delete-btn"
-                    title="削除"
-                    onClick={(e) => handleDelete(e, session)}
-                  >
-                    <img src={iconDelete} alt="削除" />
-                  </button>
+                  {authUser && authUser.id === session.user?.id && (
+                    <button
+                      className="session-delete-btn"
+                      title="削除"
+                      onClick={(e) => handleDelete(e, session)}
+                    >
+                      <img src={iconDelete} alt="削除" />
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
