@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import BriefingRoom from './components/BriefingRoom/BriefingRoom';
 import MSDeck from './components/MSDeck/MSDeck';
@@ -11,9 +11,21 @@ function App() {
   const [activeTab, setActiveTab] = useState('briefing');
   const [selectedSession, setSelectedSession] = useState(null);
 
-  const [authModal, setAuthModal] = useState(null); // null | 'login' | 'register'
+  const [authModal, setAuthModal] = useState(null); // null | 'login' | 'register' | 'reset-password'
   const [authUser, setAuthUser] = useState(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [resetParams, setResetParams] = useState({ token: '', email: '' });
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const email = params.get('email');
+    if (token && email) {
+      setResetParams({ token, email });
+      setAuthModal('reset-password');
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
 
   const openModal = (type) => setAuthModal(type);
   const closeModal = () => setAuthModal(null);
@@ -98,6 +110,8 @@ function App() {
       {authModal && (
         <AuthModal
           mode={authModal}
+          initialToken={resetParams.token}
+          initialEmail={resetParams.email}
           onSuccess={(user) => { setAuthUser(user); closeModal(); }}
           onClose={closeModal}
         />

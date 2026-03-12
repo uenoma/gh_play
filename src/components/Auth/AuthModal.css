@@ -103,3 +103,33 @@
 .auth-btn-cancel:hover {
   box-shadow: 0 0 10px #888;
 }
+
+.auth-forgot-link {
+  text-align: right;
+  margin-top: -4px;
+}
+
+.auth-link-btn {
+  background: none;
+  border: none;
+  color: var(--glow-color);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.auth-link-btn:hover {
+  opacity: 1;
+}
+
+.auth-success {
+  color: #6bffb0;
+  font-size: 14px;
+  text-align: center;
+  margin: 0 0 8px 0;
+  line-height: 1.6;
+}
+

@@ -181,3 +181,28 @@ export const joinGameSession = (id) => request('POST', `/game-sessions/${id}/joi
  * @returns {{ message: string }}
  */
 export const leaveGameSession = (id) => request('DELETE', `/game-sessions/${id}/leave`, null, true);
+
+// ============================================================
+// パスワード管理
+// ============================================================
+
+/**
+ * パスワードリセットメール送信
+ * @param {string} email
+ * @returns {{ message: string }}
+ */
+export const forgotPassword = (email) => request('POST', '/forgot-password', { email });
+
+/**
+ * パスワードリセット実行
+ * @param {{ token: string, email: string, password: string, password_confirmation: string }} params
+ * @returns {{ message: string }}
+ */
+export const resetPassword = (params) => request('POST', '/reset-password', params);
+
+/**
+ * パスワード変更（認証必須）
+ * @param {{ current_password: string, password: string, password_confirmation: string }} params
+ * @returns {{ message: string }}
+ */
+export const changePassword = (params) => request('PUT', '/user/password', params, true);
