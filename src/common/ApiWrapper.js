@@ -206,3 +206,90 @@ export const resetPassword = (params) => request('POST', '/reset-password', para
  * @returns {{ message: string }}
  */
 export const changePassword = (params) => request('PUT', '/user/password', params, true);
+
+// ============================================================
+// チャットチャンネル
+// ============================================================
+
+/**
+ * チャンネル一覧取得（認証必須）
+ * @returns {object[]}
+ */
+export const getChatChannels = () => request('GET', '/chat-channels', null, true);
+
+/**
+ * チャンネル詳細取得（認証必須）
+ * @param {number} id
+ * @returns {object}
+ */
+export const getChatChannel = (id) => request('GET', `/chat-channels/${id}`, null, true);
+
+/**
+ * チャンネル作成（認証必須）
+ * @param {{ name: string, description?: string }} params
+ * @returns {object}
+ */
+export const createChatChannel = (params) => request('POST', '/chat-channels', params, true);
+
+/**
+ * チャンネル更新（認証必須）
+ * @param {number} id
+ * @param {{ name?: string, description?: string }} params
+ * @returns {object}
+ */
+export const updateChatChannel = (id, params) => request('PATCH', `/chat-channels/${id}`, params, true);
+
+/**
+ * チャンネル削除（認証必須）
+ * @param {number} id
+ * @returns {{ message: string }}
+ */
+export const deleteChatChannel = (id) => request('DELETE', `/chat-channels/${id}`, null, true);
+
+/**
+ * チャンネル参加（認証必須）
+ * @param {number} id
+ * @returns {object}
+ */
+export const joinChatChannel = (id) => request('POST', `/chat-channels/${id}/join`, null, true);
+
+/**
+ * チャンネル退出（認証必須）
+ * @param {number} id
+ * @returns {{ message: string }}
+ */
+export const leaveChatChannel = (id) => request('DELETE', `/chat-channels/${id}/leave`, null, true);
+
+/**
+ * チャンネル既読マーク（認証必須）
+ * @param {number} id
+ * @returns {{ message: string }}
+ */
+export const markChatChannelRead = (id) => request('POST', `/chat-channels/${id}/read`, null, true);
+
+/**
+ * メッセージ一覧取得（認証必須）
+ * @param {number} channelId
+ * @param {string} [cursor]
+ * @returns {{ data: object[], next_cursor: string|null }}
+ */
+export const getChatMessages = (channelId, cursor = null) => {
+  const query = cursor ? `?cursor=${encodeURIComponent(cursor)}` : '';
+  return request('GET', `/chat-channels/${channelId}/messages${query}`, null, true);
+};
+
+/**
+ * メッセージ投稿（認証必須）
+ * @param {number} channelId
+ * @param {{ body: string }} params
+ * @returns {object}
+ */
+export const createChatMessage = (channelId, params) => request('POST', `/chat-channels/${channelId}/messages`, params, true);
+
+/**
+ * メッセージ削除（認証必須）
+ * @param {number} channelId
+ * @param {number} messageId
+ * @returns {{ message: string }}
+ */
+export const deleteChatMessage = (channelId, messageId) => request('DELETE', `/chat-channels/${channelId}/messages/${messageId}`, null, true);
