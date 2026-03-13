@@ -83,14 +83,14 @@ function ChatMessages({ isChannelOpen, isParticipantOpen, selectedChannel, authU
         <div ref={bottomRef} />
       </div>
       <div className="chat-input-area">
-        <input
-          type="text"
+        <textarea
           className="chat-input"
-          placeholder={authUser ? 'メッセージを入力...' : 'ログインするとメッセージを送信できます'}
+          placeholder={authUser ? 'メッセージを入力... (Shift+Enterで改行)' : 'ログインするとメッセージを送信できます'}
           value={inputText}
           onChange={e => setInputText(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={!canSend}
+          rows={1}
         />
         <button className="chat-send-btn" onClick={handleSend} disabled={!canSend}>
           送信

@@ -106,6 +106,12 @@
   font-size: 1rem;
   background-color: black;
   color: white;
+  resize: none;
+  overflow-y: auto;
+  max-height: 120px;
+  line-height: 1.4;
+  font-family: inherit;
+  vertical-align: bottom;
 }
 
 .chat-send-btn {
@@ -236,6 +242,7 @@
   font-size: 0.9rem;
   white-space: pre-wrap;
   word-break: break-word;
+  text-align: left;
 }
 
 .chat-message.mine .chat-message-body {
