@@ -8,7 +8,7 @@ import SessionDetailModal from "./SessionDetailModal";
 import "./SessionList.css";
 import "../Common.css";
 
-function SessionList({ onSelectSession, selectedSession: appSelectedSession, authUser }) {
+function SessionList({ onSelectSession, selectedSession: appSelectedSession, authUser, onSessionCreated }) {
   const [sessionList, setSessionList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -194,7 +194,7 @@ function SessionList({ onSelectSession, selectedSession: appSelectedSession, aut
       )}
       {createModal && (
         <SessionCreateModal
-          onSuccess={() => { setCreateModal(false); fetchSessions(); }}
+          onSuccess={() => { setCreateModal(false); fetchSessions(); onSessionCreated?.(); }}
           onClose={() => setCreateModal(false)}
         />
       )}

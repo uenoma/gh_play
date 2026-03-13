@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { createGameSession, createChatChannel } from "../../common/ApiWrapper";
+import { createGameSession, createChatChannel, joinChatChannel } from "../../common/ApiWrapper";
 import "../Auth/AuthModal.css";
 import "./SessionCreateModal.css";
 
@@ -23,7 +23,8 @@ function SessionCreateModal({ onSuccess, onClose }) {
       await createGameSession(form);
       if (createChannel && form.name.trim()) {
         const channelName = form.name.trim().slice(0, CHANNEL_NAME_MAX);
-        await createChatChannel({ name: channelName });
+        const created = await createChatChannel({ name: channelName });
+        await joinChatChannel(created.id);
       }
       onSuccess();
     } catch (err) {

@@ -258,3 +258,167 @@
   color: #666;
   cursor: not-allowed;
 }
+
+/* MemberList レイアウト */
+.member-list-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.member-list-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.member-list-actions {
+  flex-shrink: 0;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+  margin-top: 8px;
+}
+
+.member-action-btn {
+  width: 100%;
+  padding: 6px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.member-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.join-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.join-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.leave-btn {
+  background-color: #444;
+  color: #ccc;
+}
+
+.leave-btn:hover:not(:disabled) {
+  background-color: #c0392b;
+  color: #fff;
+}
+
+/* ChannelList レイアウト */
+.channel-list-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.channel-list-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.channel-list-actions {
+  flex-shrink: 0;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+  margin-top: 8px;
+}
+
+.channel-action-btn {
+  width: 100%;
+  padding: 6px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.channel-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.channel-delete-btn {
+  background-color: #444;
+  color: #ccc;
+}
+
+.channel-delete-btn:hover:not(:disabled) {
+  background-color: #c0392b;
+  color: #fff;
+}
+
+.channel-add-btn {
+  background-color: #1a3a1a;
+  color: #6fcf6f;
+  margin-bottom: 6px;
+}
+
+.channel-add-btn:hover:not(:disabled) {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+.channel-create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.channel-create-input {
+  background-color: #111;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: #fff;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.channel-create-input:focus {
+  border-color: #007bff;
+}
+
+.channel-create-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.channel-create-btns .channel-action-btn {
+  flex: 1;
+}
+
+.channel-create-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.channel-create-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.channel-create-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.channel-cancel-btn {
+  background-color: #444;
+  color: #ccc;
+}
+
+.channel-cancel-btn:hover {
+  background-color: #666;
+}
