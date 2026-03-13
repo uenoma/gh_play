@@ -1,13 +1,16 @@
 import React, { useState, useRef } from "react";
-import { createGameSession } from "../../common/ApiWrapper";
+import { createGameSession, createChatChannel } from "../../common/ApiWrapper";
 import "../Auth/AuthModal.css";
 import "./SessionCreateModal.css";
+
+const CHANNEL_NAME_MAX = 100;
 
 /**
  * @param {{ onSuccess: () => void, onClose: () => void }} props
  */
 function SessionCreateModal({ onSuccess, onClose }) {
   const [form, setForm] = useState({ name: "", description: "", capacity: 4 });
+  const [createChannel, setCreateChannel] = useState(true);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const mouseDownOnOverlay = useRef(false);
@@ -18,6 +21,10 @@ function SessionCreateModal({ onSuccess, onClose }) {
     setError("");
     try {
       await createGameSession(form);
+      if (createChannel && form.name.trim()) {
+        const channelName = form.name.trim().slice(0, CHANNEL_NAME_MAX);
+        await createChatChannel({ name: channelName });
+      }
       onSuccess();
     } catch (err) {
       setError(err.message);
@@ -73,6 +80,21 @@ function SessionCreateModal({ onSuccess, onClose }) {
             </div>
           </div>
           {error && <p className="auth-error">{error}</p>}
+          <div className="auth-form-group create-channel-check">
+            <label>
+              <input
+                type="checkbox"
+                checked={createChannel}
+                onChange={(e) => setCreateChannel(e.target.checked)}
+              />
+              チャットチャンネルを作成
+              {createChannel && form.name.trim().length > CHANNEL_NAME_MAX && (
+                <span className="create-channel-note">
+                  （チャンネル名は{CHANNEL_NAME_MAX}文字でカットされます）
+                </span>
+              )}
+            </label>
+          </div>
           <div className="auth-modal-actions">
             <button type="submit" className="auth-btn" disabled={loading}>
               {loading ? "処理中..." : "作成"}

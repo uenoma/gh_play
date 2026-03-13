@@ -16,3 +16,28 @@
   border-color: var(--glow-color);
   box-shadow: 0 0 6px #00ffff44;
 }
+
+.create-channel-check {
+  margin-top: 4px;
+}
+
+.create-channel-check label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.create-channel-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--glow-color, #00ffff);
+}
+
+.create-channel-note {
+  font-size: 12px;
+  color: #f0ad4e;
+}
