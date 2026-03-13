@@ -10,7 +10,7 @@ function BriefingRoom({ onSelectSession, selectedSession, authUser }) {
         <SessionList onSelectSession={onSelectSession} selectedSession={selectedSession} authUser={authUser} />
       </div>
       <div className="briefing-right">
-        <Chat />
+        <Chat authUser={authUser} />
       </div>
     </div>
   );

@@ -182,3 +182,79 @@
   align-items: center;
   margin-bottom: 10px;
 }
+
+/* チャットメッセージ */
+.chat-status {
+  color: #888;
+  font-size: 0.9rem;
+  padding: 10px 0;
+}
+
+.chat-error {
+  color: #e74c3c;
+}
+
+.channel-status {
+  color: #888;
+  font-size: 0.9rem;
+  padding: 5px 0;
+}
+
+.channel-error {
+  color: #e74c3c;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+  max-width: 80%;
+}
+
+.chat-message.mine {
+  align-self: flex-end;
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+.chat-message.theirs {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.chat-message-user {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 2px;
+}
+
+.chat-message-body {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-message.mine .chat-message-body {
+  background-color: #004a99;
+  border-color: #0062cc;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-send-btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.chat-input:disabled {
+  background-color: #111;
+  color: #666;
+  cursor: not-allowed;
+}

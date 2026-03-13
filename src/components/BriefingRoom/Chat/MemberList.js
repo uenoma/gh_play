@@ -1,7 +1,7 @@
 import React from 'react';
 import './Chat.css';
 
-function MemberList({ isOpen, onToggle }) {
+function MemberList({ isOpen, onToggle, members = [] }) {
   return (
     <div className={`chat-participants ${isOpen ? 'open' : 'closed'}`}>
       {isOpen ? (
@@ -10,11 +10,15 @@ function MemberList({ isOpen, onToggle }) {
             <h4>参加者</h4>
             <button onClick={onToggle} className="toggle-btn">▶</button>
           </div>
-          <ul>
-            <li>ユーザー1</li>
-            <li>ユーザー2</li>
-            <li>ユーザー3</li>
-          </ul>
+          {members.length === 0 ? (
+            <p className="channel-status">参加者なし</p>
+          ) : (
+            <ul>
+              {members.map(member => (
+                <li key={member.id}>{member.name}</li>
+              ))}
+            </ul>
+          )}
         </div>
       ) : (
         <button onClick={onToggle} className="toggle-btn">◀</button>
