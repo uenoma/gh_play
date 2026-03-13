@@ -79,6 +79,12 @@ export const logout = async () => {
 };
 
 /**
+ * ログイン中ユーザー取得（認証必須）
+ * @returns {{ id: number, name: string, email: string }}
+ */
+export const getMe = () => request('GET', '/user', null, true);
+
+/**
  * 退会（認証必須）
  * @returns {{ message: string }}
  */

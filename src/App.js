@@ -4,7 +4,7 @@ import BriefingRoom from './components/BriefingRoom/BriefingRoom';
 import MSDeck from './components/MSDeck/MSDeck';
 import MapContainer from './components/BattleMap/MapContainer';
 import PlotContainer from './components/Plot/PlotContainer';
-import { logout } from './common/ApiWrapper';
+import { logout, getMe, getToken } from './common/ApiWrapper';
 import AuthModal from './components/Auth/AuthModal';
 
 function App() {
@@ -15,6 +15,14 @@ function App() {
   const [authUser, setAuthUser] = useState(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [resetParams, setResetParams] = useState({ token: '', email: '' });
+
+  useEffect(() => {
+    if (getToken()) {
+      getMe()
+        .then((user) => setAuthUser(user))
+        .catch(() => {}); // トークンが無効な場合は何もしない
+    }
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
