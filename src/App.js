@@ -6,6 +6,7 @@ import MapContainer from './components/BattleMap/MapContainer';
 import PlotContainer from './components/Plot/PlotContainer';
 import { logout, getMe, getToken } from './common/ApiWrapper';
 import AuthModal from './components/Auth/AuthModal';
+import Report from './components/Report/Report';
 
 function App() {
   const [activeTab, setActiveTab] = useState('briefing');
@@ -51,6 +52,7 @@ function App() {
   const tabs = [
     { id: 'briefing', label: 'ブリーフィング' },
     { id: 'msdeck', label: 'MSデッキ' },
+    { id: 'report', label: '戦況' },
     { id: 'combatmap', label: '戦闘マップ' },
     { id: 'plot', label: '行動計画' }
   ];
@@ -60,7 +62,9 @@ function App() {
       case 'briefing':
         return <BriefingRoom onSelectSession={setSelectedSession} selectedSession={selectedSession} authUser={authUser} />;
       case 'msdeck':
-        return <MSDeck />;
+        return <MSDeck selectedSession={selectedSession} authUser={authUser} />;
+      case 'report':
+        return <Report selectedSession={selectedSession} />;
       case 'combatmap':
         return <MapContainer />;
       case 'plot':

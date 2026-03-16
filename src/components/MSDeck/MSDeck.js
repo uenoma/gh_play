@@ -3,9 +3,9 @@ import DataViewer from "../DataViewer/DataViewer";
 import MSList from "./MSList";
 import "./MSDeck.css";
 import "../Common.css";
-import { getMobileSuits } from "../../common/ApiWrapper";
+import { getMobileSuits, getGameSession, selectSessionMobileSuit } from "../../common/ApiWrapper";
 
-function MSDeck() {
+function MSDeck({ selectedSession, authUser }) {
   const [mobileSuits, setMobileSuits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,6 +13,9 @@ function MSDeck() {
   const [sortKey, setSortKey] = useState("id");
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState("");
+  const [sessionData, setSessionData] = useState(null);
+  const [selectLoading, setSelectLoading] = useState(false);
+  const [selectError, setSelectError] = useState(null);
 
   useEffect(() => {
     const fetchMobileSuits = async () => {
@@ -31,6 +34,24 @@ function MSDeck() {
 
     fetchMobileSuits();
   }, []);
+
+  const loadSessionData = async () => {
+    if (!selectedSession) {
+      setSessionData(null);
+      return;
+    }
+    try {
+      const data = await getGameSession(selectedSession.id);
+      setSessionData(data);
+    } catch (_) {
+      setSessionData(null);
+    }
+  };
+
+  useEffect(() => {
+    loadSessionData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSession]);
 
   const prevMS = () => {
     const index = mobileSuits.findIndex((ms) => ms.id === selectedMS.id);
@@ -64,6 +85,27 @@ function MSDeck() {
     } else {
       setSortKey(key);
       setSortOrder("asc");
+    }
+  };
+
+  const isMember = authUser && sessionData &&
+    sessionData.members?.some((m) => m.id === authUser.id);
+  const mySelectedMSId = isMember
+    ? sessionData.members.find((m) => m.id === authUser.id)?.pivot?.mobile_suit_id
+    : null;
+  const isMyMS = selectedMS && mySelectedMSId === selectedMS.id;
+
+  const handleSelectMS = async () => {
+    if (!selectedSession || !selectedMS) return;
+    setSelectLoading(true);
+    setSelectError(null);
+    try {
+      await selectSessionMobileSuit(selectedSession.id, isMyMS ? null : selectedMS.id);
+      await loadSessionData();
+    } catch (err) {
+      setSelectError(err.message);
+    } finally {
+      setSelectLoading(false);
     }
   };
 
@@ -148,6 +190,23 @@ function MSDeck() {
           →|
         </button>
       </div>
+      {isMember && selectedMS && (
+        <div className="msdeck-select-bar">
+          {mySelectedMSId && !isMyMS && (
+            <span className="msdeck-current-ms">
+              現在の選択機体: {mobileSuits.find((ms) => ms.id === mySelectedMSId)?.ms_name ?? `ID:${mySelectedMSId}`}
+            </span>
+          )}
+          <button
+            className={`msdeck-select-btn${isMyMS ? " msdeck-select-btn--active" : ""}`}
+            onClick={handleSelectMS}
+            disabled={selectLoading}
+          >
+            {selectLoading ? "処理中..." : isMyMS ? "選択解除" : "この機体を使用する"}
+          </button>
+          {selectError && <span className="msdeck-select-error">{selectError}</span>}
+        </div>
+      )}
       <div className="msdeck-data-viewer">
         <DataViewer data={selectedMS} />
       </div>

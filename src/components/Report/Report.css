@@ -1,0 +1,48 @@
+.report {
+  padding: 16px;
+  color: #e0e0e0;
+}
+
+.report-session-name {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.report-section {
+  margin-bottom: 24px;
+}
+
+.report-section-title {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #aaa;
+  border-bottom: 1px solid #444;
+  padding-bottom: 4px;
+}
+
+.report-members-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-members-table th,
+.report-members-table td {
+  text-align: left;
+  padding: 6px 12px;
+  border-bottom: 1px solid #333;
+}
+
+.report-members-table th {
+  color: #aaa;
+  font-weight: normal;
+}
+
+.report-status {
+  color: #888;
+  font-size: 0.95rem;
+}
+
+.report-error {
+  color: #e57373;
+}

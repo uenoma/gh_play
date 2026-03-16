@@ -86,3 +86,53 @@
   max-width: 100%;
   overflow: auto;
 }
+
+.msdeck-select-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 20px 10px;
+  flex-wrap: wrap;
+}
+
+.msdeck-current-ms {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.msdeck-select-btn {
+  padding: 6px 18px;
+  background: linear-gradient(145deg, #2a2a4e, #1a1a3e);
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px #0000004D;
+}
+
+.msdeck-select-btn:hover:not(:disabled) {
+  box-shadow: 0 0 15px #00ffff;
+  transform: translateY(-2px);
+}
+
+.msdeck-select-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.msdeck-select-btn--active {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.msdeck-select-btn--active:hover:not(:disabled) {
+  box-shadow: 0 0 15px #ff6b6b;
+}
+
+.msdeck-select-error {
+  color: #e57373;
+  font-size: 0.85rem;
+}

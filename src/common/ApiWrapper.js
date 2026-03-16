@@ -188,6 +188,15 @@ export const joinGameSession = (id) => request('POST', `/game-sessions/${id}/joi
  */
 export const leaveGameSession = (id) => request('DELETE', `/game-sessions/${id}/leave`, null, true);
 
+/**
+ * セッションで使用する機体を選択・解除（認証必須）
+ * @param {number} id - ゲームセッションID
+ * @param {number|null} mobileSuitId - 機体ID（null で解除）
+ * @returns {object} 更新されたゲームセッション
+ */
+export const selectSessionMobileSuit = (id, mobileSuitId) =>
+  request('PUT', `/game-sessions/${id}/mobile-suit`, { mobile_suit_id: mobileSuitId }, true);
+
 // ============================================================
 // パスワード管理
 // ============================================================
