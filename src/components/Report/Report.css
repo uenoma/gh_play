@@ -24,6 +24,7 @@
 .report-members-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.8rem;
 }
 
 .report-members-table th,
@@ -37,11 +38,48 @@
   color: #aaa;
   font-weight: normal;
   text-align: center;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.report-members-table tbody td:nth-child(3),
+.report-members-table thead tr:first-child th:nth-child(3) {
+  border-right: 3px double #666;
+}
+
+.report-members-table thead tr:last-child th:first-child {
+  border-left: 3px double #666;
 }
 
 .report-status {
   color: #888;
   font-size: 0.95rem;
+}
+
+.report-center {
+  text-align: center;
+}
+
+.report-ip-input {
+  width: 54px;
+  padding: 2px 4px;
+  background: #000;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.report-ip-with-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.report-ip-inertia {
+  width: 90px;
 }
 
 .report-error {
@@ -119,6 +157,7 @@
 .report-mapsize-edit {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
 }

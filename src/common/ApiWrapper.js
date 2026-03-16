@@ -198,6 +198,24 @@ export const updatePilotPoint = (id, pilotPoint) =>
   request('PUT', `/game-sessions/${id}/pilot-point`, { pilot_point: pilotPoint }, true);
 
 /**
+ * イニングのPlot一覧取得（全参加者分）
+ * @param {number} id - ゲームセッションID
+ * @param {number} inning - イニング番号（0〜99）
+ * @returns {object[]}
+ */
+export const getSessionPlots = (id, inning) => request('GET', `/game-sessions/${id}/plots/${inning}`);
+
+/**
+ * イニングのPlot登録・更新（認証必須）
+ * @param {number} id - ゲームセッションID
+ * @param {number} inning - イニング番号（0〜99）
+ * @param {{ plot?: object, damage?: array }} body
+ * @returns {object}
+ */
+export const updateSessionPlot = (id, inning, body) =>
+  request('PUT', `/game-sessions/${id}/plots/${inning}`, body, true);
+
+/**
  * セッションレポート取得（参加者・使用機体・パイロットポイント）
  * @param {number} id - ゲームセッションID
  * @returns {object} セッションレポート
