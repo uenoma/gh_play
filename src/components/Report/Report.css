@@ -115,3 +115,35 @@
   width: 100%;
   text-align: center;
 }
+
+.report-mapsize-edit {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.report-mapsize-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.report-mapsize-input {
+  width: 60px;
+  padding: 2px 6px;
+  background: #000;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.report-mapsize-display {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin: 0;
+}

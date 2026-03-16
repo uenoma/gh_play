@@ -205,6 +205,21 @@ export const updatePilotPoint = (id, pilotPoint) =>
 export const getSessionReport = (id) => request('GET', `/game-sessions/${id}/report`);
 
 /**
+ * 戦闘マップサイズ取得
+ * @param {number} id - ゲームセッションID
+ * @returns {{ map_width: number, map_height: number }}
+ */
+export const getMapSize = (id) => request('GET', `/game-sessions/${id}/map-size`);
+
+/**
+ * 戦闘マップサイズ更新（認証必須・セッション作成者のみ）
+ * @param {number} id - ゲームセッションID
+ * @param {{ map_width?: number, map_height?: number }} params
+ * @returns {{ map_width: number, map_height: number }}
+ */
+export const updateMapSize = (id, params) => request('PUT', `/game-sessions/${id}/map-size`, params, true);
+
+/**
  * セッションで使用する機体を選択・解除（認証必須）
  * @param {number} id - ゲームセッションID
  * @param {number|null} mobileSuitId - 機体ID（null で解除）

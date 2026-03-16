@@ -1,12 +1,25 @@
 import './MapContainer.css';
 import HexMap from './HexMap';
 import { useState, useEffect } from "react"
+import { getMapSize } from '../../common/ApiWrapper';
 
-function MapContainer() {
+function MapContainer({ selectedSession }) {
 
   const [mapWidth, setMapWidth] = useState(24);
   const [mapHeight, setMapHeight] = useState(32);
   const [hexSize, setHexSize] = useState(60);
+
+  useEffect(() => {
+    if (!selectedSession) return;
+    getMapSize(selectedSession.id)
+      .then((data) => {
+        setMapWidth(data.map_width);
+        setMapHeight(data.map_height);
+        document.getElementById('inputWidth').value = data.map_width;
+        document.getElementById('inputHeight').value = data.map_height;
+      })
+      .catch(() => {});
+  }, [selectedSession]);
 
   const changeSize = (e) => {
     var width = Number(document.getElementById("inputWidth").value);

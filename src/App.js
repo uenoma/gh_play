@@ -66,7 +66,7 @@ function App() {
       case 'report':
         return <Report selectedSession={selectedSession} authUser={authUser} />;
       case 'combatmap':
-        return <MapContainer />;
+        return <MapContainer selectedSession={selectedSession} />;
       case 'plot':
         return <PlotContainer />;
       default:
