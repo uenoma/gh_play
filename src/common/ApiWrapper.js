@@ -189,6 +189,13 @@ export const joinGameSession = (id) => request('POST', `/game-sessions/${id}/joi
 export const leaveGameSession = (id) => request('DELETE', `/game-sessions/${id}/leave`, null, true);
 
 /**
+ * セッションレポート取得（参加者・使用機体・パイロットポイント）
+ * @param {number} id - ゲームセッションID
+ * @returns {object} セッションレポート
+ */
+export const getSessionReport = (id) => request('GET', `/game-sessions/${id}/report`);
+
+/**
  * セッションで使用する機体を選択・解除（認証必須）
  * @param {number} id - ゲームセッションID
  * @param {number|null} mobileSuitId - 機体ID（null で解除）

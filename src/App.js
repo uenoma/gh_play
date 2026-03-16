@@ -53,8 +53,8 @@ function App() {
     { id: 'briefing', label: 'ブリーフィング' },
     { id: 'msdeck', label: 'MSデッキ' },
     { id: 'report', label: '戦況' },
+    { id: 'plot', label: '行動計画' },
     { id: 'combatmap', label: '戦闘マップ' },
-    { id: 'plot', label: '行動計画' }
   ];
 
   const renderTabContent = () => {

@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { getGameSession } from '../../common/ApiWrapper';
+import { getSessionReport } from '../../common/ApiWrapper';
 import './Report.css';
 
 function Report({ selectedSession }) {
-  const [session, setSession] = useState(null);
+  const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!selectedSession) {
-      setSession(null);
+      setReport(null);
       return;
     }
     setLoading(true);
     setError(null);
-    getGameSession(selectedSession.id)
-      .then((data) => setSession(data))
+    getSessionReport(selectedSession.id)
+      .then((data) => setReport(data))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [selectedSession]);
@@ -30,27 +30,40 @@ function Report({ selectedSession }) {
     return <div className="report"><p className="report-status report-error">{error}</p></div>;
   }
 
-  const formatDate = (iso) =>
-    iso ? new Date(iso).toLocaleString('ja-JP', { dateStyle: 'short', timeStyle: 'short' }) : '-';
-
   return (
     <div className="report">
-      <h2 className="report-session-name">{session?.name}</h2>
+      <h2 className="report-session-name">{report?.name}</h2>
       <section className="report-section">
         <h3 className="report-section-title">参加者一覧</h3>
-        {session?.members && session.members.length > 0 ? (
+        {report?.members && report.members.length > 0 ? (
           <table className="report-members-table">
             <thead>
               <tr>
+                <th>使用機体</th>
+                <th>パイロットポイント</th>
                 <th>名前</th>
-                <th>参加日時</th>
               </tr>
             </thead>
             <tbody>
-              {session.members.map((member) => (
+              {report.members.map((member) => (
                 <tr key={member.id}>
+                  <td>
+                    {member.mobile_suit ? (
+                      <span className="report-ms-name">
+                        {member.mobile_suit.ms_number && (
+                          <span className="report-ms-number">{member.mobile_suit.ms_number}</span>
+                        )}
+                        {member.mobile_suit.ms_name}
+                        {member.mobile_suit.ms_name_optional && (
+                          <span className="report-ms-optional"> ({member.mobile_suit.ms_name_optional})</span>
+                        )}
+                      </span>
+                    ) : (
+                      <span className="report-ms-none">未選択</span>
+                    )}
+                  </td>
+                  <td className="report-pilot-point">{member.pilot_point ?? '-'}</td>
                   <td>{member.name}</td>
-                  <td>{formatDate(member.pivot?.joined_at)}</td>
                 </tr>
               ))}
             </tbody>

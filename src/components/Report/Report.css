@@ -36,6 +36,7 @@
 .report-members-table th {
   color: #aaa;
   font-weight: normal;
+  text-align: center;
 }
 
 .report-status {
@@ -45,4 +46,26 @@
 
 .report-error {
   color: #e57373;
+}
+
+.report-ms-number {
+  color: #aaa;
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+.report-ms-optional {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.report-ms-none {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.report-pilot-point {
+  text-align: center;
+  font-weight: bold;
+  color: #00ffff;
 }
