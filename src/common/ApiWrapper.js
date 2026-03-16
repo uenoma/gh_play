@@ -189,6 +189,15 @@ export const joinGameSession = (id) => request('POST', `/game-sessions/${id}/joi
 export const leaveGameSession = (id) => request('DELETE', `/game-sessions/${id}/leave`, null, true);
 
 /**
+ * パイロットポイントの更新（認証必須）
+ * @param {number} id - ゲームセッションID
+ * @param {number} pilotPoint - パイロットポイント（0以上）
+ * @returns {object} 更新されたゲームセッション
+ */
+export const updatePilotPoint = (id, pilotPoint) =>
+  request('PUT', `/game-sessions/${id}/pilot-point`, { pilot_point: pilotPoint }, true);
+
+/**
  * セッションレポート取得（参加者・使用機体・パイロットポイント）
  * @param {number} id - ゲームセッションID
  * @returns {object} セッションレポート

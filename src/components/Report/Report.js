@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { getSessionReport } from '../../common/ApiWrapper';
+import { getSessionReport, updatePilotPoint } from '../../common/ApiWrapper';
 import './Report.css';
 
-function Report({ selectedSession }) {
+function Report({ selectedSession, authUser }) {
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [ppDraft, setPpDraft] = useState({});   // { [memberId]: value }
+  const [ppSaving, setPpSaving] = useState({}); // { [memberId]: bool }
+  const [ppError, setPpError] = useState({});   // { [memberId]: string }
 
   useEffect(() => {
     if (!selectedSession) {
@@ -15,10 +18,34 @@ function Report({ selectedSession }) {
     setLoading(true);
     setError(null);
     getSessionReport(selectedSession.id)
-      .then((data) => setReport(data))
+      .then((data) => {
+        setReport(data);
+        const drafts = {};
+        data.members?.forEach((m) => { drafts[m.id] = m.pilot_point ?? 0; });
+        setPpDraft(drafts);
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [selectedSession]);
+
+  const handlePpSave = async (memberId) => {
+    if (!selectedSession) return;
+    setPpSaving((prev) => ({ ...prev, [memberId]: true }));
+    setPpError((prev) => ({ ...prev, [memberId]: null }));
+    try {
+      await updatePilotPoint(selectedSession.id, ppDraft[memberId]);
+      setReport((prev) => ({
+        ...prev,
+        members: prev.members.map((m) =>
+          m.id === memberId ? { ...m, pilot_point: ppDraft[memberId] } : m
+        ),
+      }));
+    } catch (err) {
+      setPpError((prev) => ({ ...prev, [memberId]: err.message }));
+    } finally {
+      setPpSaving((prev) => ({ ...prev, [memberId]: false }));
+    }
+  };
 
   if (!selectedSession) {
     return <div className="report"><p className="report-status">セッションを選択してください</p></div>;
@@ -62,7 +89,33 @@ function Report({ selectedSession }) {
                       <span className="report-ms-none">未選択</span>
                     )}
                   </td>
-                  <td className="report-pilot-point">{member.pilot_point ?? '-'}</td>
+                  <td className="report-pilot-point">
+                    {authUser && authUser.id === member.id ? (
+                      <div className="report-pp-edit">
+                        <input
+                          type="number"
+                          className="report-pp-input"
+                          min={0}
+                          value={ppDraft[member.id] ?? 0}
+                          onChange={(e) =>
+                            setPpDraft((prev) => ({ ...prev, [member.id]: Number(e.target.value) }))
+                          }
+                        />
+                        <button
+                          className="report-pp-btn"
+                          onClick={() => handlePpSave(member.id)}
+                          disabled={ppSaving[member.id] || ppDraft[member.id] === member.pilot_point}
+                        >
+                          {ppSaving[member.id] ? '...' : '更新'}
+                        </button>
+                        {ppError[member.id] && (
+                          <span className="report-pp-error">{ppError[member.id]}</span>
+                        )}
+                      </div>
+                    ) : (
+                      member.pilot_point ?? '-'
+                    )}
+                  </td>
                   <td>{member.name}</td>
                 </tr>
               ))}

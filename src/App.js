@@ -64,7 +64,7 @@ function App() {
       case 'msdeck':
         return <MSDeck selectedSession={selectedSession} authUser={authUser} />;
       case 'report':
-        return <Report selectedSession={selectedSession} />;
+        return <Report selectedSession={selectedSession} authUser={authUser} />;
       case 'combatmap':
         return <MapContainer />;
       case 'plot':
