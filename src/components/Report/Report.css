@@ -27,6 +27,10 @@
   font-size: 0.8rem;
 }
 
+.report-members-table thead {
+  background-color: #222;
+}
+
 .report-members-table th,
 .report-members-table td {
   text-align: left;
@@ -57,7 +61,7 @@
 }
 
 .report-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .report-ip-input {
@@ -103,7 +107,7 @@
 }
 
 .report-pilot-point {
-  text-align: center;
+  text-align: center !important;
   font-weight: bold;
   color: #00ffff;
 }

@@ -164,7 +164,7 @@ function Report({ selectedSession, authUser }) {
           {isOwner ? (
             <div className="report-mapsize-edit">
               <label className="report-mapsize-label">
-                幅
+                横サイズ
                 <input
                   type="number"
                   className="report-mapsize-input"
@@ -175,7 +175,7 @@ function Report({ selectedSession, authUser }) {
                 />
               </label>
               <label className="report-mapsize-label">
-                高さ
+                縦サイズ
                 <input
                   type="number"
                   className="report-mapsize-input"
@@ -200,7 +200,7 @@ function Report({ selectedSession, authUser }) {
             </div>
           ) : (
             <p className="report-mapsize-display">
-              幅 {mapSize.map_width} × 高さ {mapSize.map_height}
+              横 {mapSize.map_width} × 縦 {mapSize.map_height}
             </p>
           )}
         </section>
@@ -270,7 +270,7 @@ function Report({ selectedSession, authUser }) {
                       member.pilot_point ?? '-'
                     )}
                   </td>
-                  <td>{member.name}</td>
+                  <td className="report-center">{member.name}</td>
                   <td className="report-center">
                     {authUser && authUser.id === member.id ? (
                       <input
@@ -288,7 +288,7 @@ function Report({ selectedSession, authUser }) {
                         type="number"
                         className="report-ip-input"
                         min={1} max={6}
-                        placeholder="1-6"
+                        placeholder="1～6"
                         value={ipDraft[member.id]?.direction ?? ''}
                         onChange={(e) => setIpDraft((prev) => ({ ...prev, [member.id]: { ...prev[member.id], direction: e.target.value } }))}
                       />
